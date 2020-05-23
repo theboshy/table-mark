@@ -2,6 +2,7 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 
 export const Card = (props: any) => {
     const [time, setTime] = useState(0);
+    const [ome, setOme] = useState('ome');
 
     useEffect(()=> {
         console.log('time changed!');
@@ -11,6 +12,7 @@ export const Card = (props: any) => {
         console.log('result:', log);
         asyncFunction().then( () => {
             setTime(1);
+            setOme('ome 2');
         });
         runCallback(callbackC);
     };
@@ -33,7 +35,7 @@ export const Card = (props: any) => {
     }
 
     return <>
-        <p>Card component {props.name} {time}</p>
+        <p>Card component {props.name} {time} {ome}</p>
         <button onClick={() => showConsole()}>CLICK ME!</button>
     </>
 }
