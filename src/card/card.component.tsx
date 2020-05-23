@@ -12,8 +12,16 @@ export const Card = (props: any) => {
         asyncFunction().then( () => {
             setTime(1);
         });
+        runCallback(callbackC);
     };
 
+    const callbackC =  () => {
+        console.log('callback executed!');
+    }
+
+    const runCallback = (callback: any) => {
+        callback();
+    }
 
     const asyncFunction = () => {
         return new Promise(resolve =>
