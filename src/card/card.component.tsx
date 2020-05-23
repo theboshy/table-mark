@@ -23,6 +23,9 @@ export const Card = (props: any) => {
         callback();
     }
 
+    /**
+     * to be executed 2 seconds later
+     */
     const asyncFunction = () => {
         return new Promise(resolve =>
             setTimeout(() => resolve(), 2000)
