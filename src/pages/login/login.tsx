@@ -1,8 +1,13 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import './loginStyle.scss';
+import {StorageService} from '../../services/save.local.storage';
+
 export const LoginPage = (props: any) => {
 
     const [userName, setUserName] = useState('');
+
+    const storageService = new StorageService();
+    storageService.set('some_shit', 'shit!');
 
     const text = 'Lorem Ipsum er ganske enkelt dummy tekst fra trykkeri- og typebransjen. Lorem Ipsum har vært bransjens standard dummy-tekst helt siden 1500-tallet, da en ukjent skriver tok en bysse av typen og krypset den for å lage en type eksemplarbok. Det har overlevd ikke bare fem århundrer, men også spranget til elektronisk setting, og forblir i hovedsak uendret. Det ble popularisert på 1960-tallet med utgivelsen av Letraset-ark som inneholder Lorem Ipsum-passasjer, og mer nylig med desktop-publiseringsprogramvare som Aldus PageMaker inkludert versjoner av Lorem Ipsum.';
     const text2 = 'Den vanlige delen av Lorem Ipsum brukt siden 1500-tallet er gjengitt nedenfor for de som er interessert. Avsnittene 1.10.32 og 1.10.33 fra "de Finibus Bonorum et Malorum" av Cicero er også gjengitt i sin eksakte originale form, ledsaget av engelske versjoner fra 1914-oversettelsen av H. Rackham.';
