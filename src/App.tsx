@@ -11,11 +11,11 @@ export const App = (props: any) => {
   return <>
       <BrowserRouter >
             <Switch>
-                <Route exact path="/game" component={Card}/>
-                <Route exact path='/login' component={LoginPage}/>
+                <Route exact path={process.env.PUBLIC_URL + '/game'} component={Card}/>
+                <Route exact path={process.env.PUBLIC_URL + '/login'} component={LoginPage}/>
             </Switch>
         </BrowserRouter>
-          <button onClick={() => window.location.href='/login'}>Login</button>
+          <button onClick={() => window.location.href=process.env.PUBLIC_URL + '/login'}>Login</button>
       </>
 }
 
