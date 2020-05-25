@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/table-mark/static/css/main.d4e287c1.chunk.css",
-    "main.js": "/table-mark/static/js/main.d0144941.chunk.js",
-    "main.js.map": "/table-mark/static/js/main.d0144941.chunk.js.map",
-    "runtime-main.js": "/table-mark/static/js/runtime-main.7877bd19.js",
-    "runtime-main.js.map": "/table-mark/static/js/runtime-main.7877bd19.js.map",
-    "static/js/2.597677e2.chunk.js": "/table-mark/static/js/2.597677e2.chunk.js",
-    "static/js/2.597677e2.chunk.js.map": "/table-mark/static/js/2.597677e2.chunk.js.map",
-    "index.html": "/table-mark/index.html",
-    "precache-manifest.115899b07840b765d660636d488b1e39.js": "/table-mark/precache-manifest.115899b07840b765d660636d488b1e39.js",
-    "service-worker.js": "/table-mark/service-worker.js",
-    "static/css/main.d4e287c1.chunk.css.map": "/table-mark/static/css/main.d4e287c1.chunk.css.map",
-    "static/js/2.597677e2.chunk.js.LICENSE.txt": "/table-mark/static/js/2.597677e2.chunk.js.LICENSE.txt"
+    "main.css": "https://theboshy.github.io/table-mark/static/css/main.d4e287c1.chunk.css",
+    "main.js": "https://theboshy.github.io/table-mark/static/js/main.ca776dc4.chunk.js",
+    "main.js.map": "https://theboshy.github.io/table-mark/static/js/main.ca776dc4.chunk.js.map",
+    "runtime-main.js": "https://theboshy.github.io/table-mark/static/js/runtime-main.39ed4dfb.js",
+    "runtime-main.js.map": "https://theboshy.github.io/table-mark/static/js/runtime-main.39ed4dfb.js.map",
+    "static/js/2.53ef5682.chunk.js": "https://theboshy.github.io/table-mark/static/js/2.53ef5682.chunk.js",
+    "static/js/2.53ef5682.chunk.js.map": "https://theboshy.github.io/table-mark/static/js/2.53ef5682.chunk.js.map",
+    "index.html": "https://theboshy.github.io/table-mark/index.html",
+    "precache-manifest.c46b4188ad05fb71dd33193aebff06f7.js": "https://theboshy.github.io/table-mark/precache-manifest.c46b4188ad05fb71dd33193aebff06f7.js",
+    "service-worker.js": "https://theboshy.github.io/table-mark/service-worker.js",
+    "static/css/main.d4e287c1.chunk.css.map": "https://theboshy.github.io/table-mark/static/css/main.d4e287c1.chunk.css.map",
+    "static/js/2.53ef5682.chunk.js.LICENSE.txt": "https://theboshy.github.io/table-mark/static/js/2.53ef5682.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7877bd19.js",
-    "static/js/2.597677e2.chunk.js",
+    "static/js/runtime-main.39ed4dfb.js",
+    "static/js/2.53ef5682.chunk.js",
     "static/css/main.d4e287c1.chunk.css",
-    "static/js/main.d0144941.chunk.js"
+    "static/js/main.ca776dc4.chunk.js"
   ]
 }
