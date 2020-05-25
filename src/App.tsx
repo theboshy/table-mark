@@ -5,12 +5,13 @@ import './App.css';
 import {LoginPage} from "./pages/login/login";
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
+
 function App() {
   return (
       <>
       <BrowserRouter >
-        <Switch>
-            <Route exact path="/game" component={Card}/>
+            <Switch>
+                <Route exact path="/game" component={Card}/>
                 <Route exact path='/login' component={LoginPage}/>
             </Switch>
         </BrowserRouter>
