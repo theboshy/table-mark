@@ -2,6 +2,8 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 import './loginStyle.scss';
 import {StorageService} from '../../services/save.local.storage';
 import { useHistory } from 'react-router-dom';
+import { writeMachine } from '../../services/save.local.machine';
+import {User} from "../../components/user/user";
 
 export const LoginPage = (props: any) => {
 
@@ -10,9 +12,17 @@ export const LoginPage = (props: any) => {
 
     const storageService = new StorageService();
     storageService.set('some_shit', 'shit!');
-
+    const wF = new writeMachine();
     const handle = () => {
-        history.push('/game')
+        //wF.writeFile("hola");
+        let d = {name: userName, score: [], icon: ""};
+        let us = User.Create(d);
+        let json = JSON.stringify(User.Create(d))
+        let usFromJson = User.Parse(json);
+        console.log(us);
+        console.log(json);
+        console.log(usFromJson);
+        history.push('/game');
     }
 
     const text = 'Lorem Ipsum er ganske enkelt dummy tekst fra trykkeri- og typebransjen. Lorem Ipsum har vært bransjens standard dummy-tekst helt siden 1500-tallet, da en ukjent skriver tok en bysse av typen og krypset den for å lage en type eksemplarbok. Det har overlevd ikke bare fem århundrer, men også spranget til elektronisk setting, og forblir i hovedsak uendret. Det ble popularisert på 1960-tallet med utgivelsen av Letraset-ark som inneholder Lorem Ipsum-passasjer, og mer nylig med desktop-publiseringsprogramvare som Aldus PageMaker inkludert versjoner av Lorem Ipsum.';
@@ -24,15 +34,20 @@ export const LoginPage = (props: any) => {
 
     return <>
         <div className="container-fluid wiki-search">
+            <section>
             <form>
                    <div className="inputGroup inputGroup2">
                     <label htmlFor="password">Nombre de usuario</label>
-                    <input type="text" id="nombre_usuario" className="password"/>
+                    <input type="text" id="nombre_usuario" className="password"
+                           onChange={(e)=>setUserName(e.target.value)}/>
+
                 </div>
                 <div className="inputGroup inputGroup3">
                     <button id="login" onClick={() => handle()}>Entrar</button>
                 </div>
             </form>
+            </section>
+            <section>
             <div className="book">
                 <span className="page turn">
                     {text}
@@ -58,7 +73,7 @@ export const LoginPage = (props: any) => {
                     <img src="https://ep00.epimg.net/cultura/imagenes/2013/06/15/actualidad/1371283072_174122_1371283573_noticia_normal.jpg"/>
                 </span>
             </div>
+            </section>
         </div>
-
     </>
 }
