@@ -3,8 +3,8 @@ import './loginStyle.scss';
 import {StorageService} from '../../services/save.local.storage';
 import { useHistory } from 'react-router-dom';
 import { writeMachine } from '../../services/save.local.machine';
-import {User} from "../../components/user/user";
 import {SendEmail} from "../../services/send.email";
+import {User} from '../../models/user';
 
 export const LoginPage = (props: any) => {
 
@@ -12,19 +12,12 @@ export const LoginPage = (props: any) => {
     const history = useHistory();
     const sendEmail = new SendEmail();
     const storageService = new StorageService();
-    storageService.set('some_shit', 'shit!');
+
+    let user = User;
+
     const wF = new writeMachine();
     const handle = (e: any) => {
-        //wF.writeFile("hola");
-        let d = {name: userName, score: [], icon: ""};
-        let us = User.Create(d);
-        let json = JSON.stringify(User.Create(d))
-        let usFromJson = User.Parse(json);
-        console.log(us);
-        console.log(json);
-        console.log(usFromJson);
-        const userInfo = {userName:usFromJson.name, level:"1", scoreLevel:"1000"};
-        sendEmail.sendEmail(e, userInfo);
+        sendEmail.sendEmail(e, user);
         history.push('/game');
     }
 
