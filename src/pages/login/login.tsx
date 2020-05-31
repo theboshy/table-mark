@@ -4,16 +4,17 @@ import {StorageService} from '../../services/save.local.storage';
 import { useHistory } from 'react-router-dom';
 import { writeMachine } from '../../services/save.local.machine';
 import {User} from "../../components/user/user";
+import {SendEmail} from "../../services/send.email";
 
 export const LoginPage = (props: any) => {
 
     const [userName, setUserName] = useState('');
     const history = useHistory();
-
+    const sendEmail = new SendEmail();
     const storageService = new StorageService();
     storageService.set('some_shit', 'shit!');
     const wF = new writeMachine();
-    const handle = () => {
+    const handle = (e: any) => {
         //wF.writeFile("hola");
         let d = {name: userName, score: [], icon: ""};
         let us = User.Create(d);
@@ -22,6 +23,8 @@ export const LoginPage = (props: any) => {
         console.log(us);
         console.log(json);
         console.log(usFromJson);
+        const userInfo = {userName:usFromJson.name, level:"1", scoreLevel:"1000"};
+        sendEmail.sendEmail(e, userInfo);
         history.push('/game');
     }
 
@@ -43,7 +46,7 @@ export const LoginPage = (props: any) => {
 
                 </div>
                 <div className="inputGroup inputGroup3">
-                    <button id="login" onClick={() => handle()}>Entrar</button>
+                    <button id="login" onClick={(e) => handle(e)}>Entrar</button>
                 </div>
             </form>
             </section>
