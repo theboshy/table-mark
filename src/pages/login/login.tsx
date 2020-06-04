@@ -5,9 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { writeMachine } from '../../services/save.local.machine';
 import {SendEmail} from "../../services/send.email";
 import {User} from '../../models/user';
-
+import {Keys} from '../../enums';
 export const LoginPage = (props: any) => {
-
     const [userName, setUserName] = useState('');
     const history = useHistory();
     const sendEmail = new SendEmail();
@@ -16,8 +15,22 @@ export const LoginPage = (props: any) => {
     let user = User;
 
     const wF = new writeMachine();
+    /**
+     * Button handler ("Entrar").
+     * @param e event
+     */
     const handle = (e: any) => {
-        sendEmail.sendEmail(e, user);
+        //sendEmail.sendEmail(e, user);
+        if((user = storageService.get(Keys.USER)) != null){ //There is a user created
+            console.log("There is a user!");
+            console.log(user);
+
+        } else{
+            let userJson = User;
+            userJson.name = userName;
+            user = userJson;
+            storageService.set(Keys.USER, user);
+        }
         history.push('/game');
     }
 

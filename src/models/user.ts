@@ -1,8 +1,10 @@
 export const Score = {
-   score: Number
+    level: 1,
+    score: 0
 }
 export const User = {
-    userName: String,
+    name:"",
     score: [Score],
-    icon: ''
+    icon: '',
+    currentLevel: 1
 };
