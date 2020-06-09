@@ -3,6 +3,13 @@ $medBlue: #4eb8dd;
 $lightBlue: #ddf1fa;
 $inputBG: #f3fafd;
 
+.container-all{
+
+}
+.margin{
+  position: relative;
+  margin:2em;
+}
 body{
   background-color:#092B40;
   margin: 0; padding: 0;
@@ -76,7 +83,7 @@ body {
 }
 .book {
   position: relative;
-  top: 40%;
+  top: 2em;
   left: 0;
   right: 0;
   bottom: 0;
@@ -199,7 +206,7 @@ body {
 
 form {
   position: absolute;
-  top: 21em;
+  top: 13em;
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
@@ -335,5 +342,11 @@ form {
       transform: translate(1.4em, 1.2em) scale(0.65);
       opacity: 1;
     }
+  }
+
+  .labelName{
+    text-align: center;
+    font-size: 2.5em;
+    text-transform: uppercase;
   }
 }

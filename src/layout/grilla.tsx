@@ -14,6 +14,9 @@ export const Grilla = (props: any) => {
         return cards;
     }
     return <>
+        <div className="selector-title-container">
+            <h1 className="selector-title">Elige un escritor</h1>
+        </div>
         <div className='layoutContainer'>
             {cards()}
         </div>

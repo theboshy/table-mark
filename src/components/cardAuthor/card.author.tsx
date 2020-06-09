@@ -2,18 +2,25 @@ import React from 'react';
 import './cardAuthor.scss';
 import {Keys} from "../../keys";
 import {StorageService} from "../../services/save.local.storage";
+import { useHistory } from 'react-router-dom';
+
 export const CardAuthor = (props: any) => {
+    const history = useHistory();
     const storageService = new StorageService();
+    let user = storageService.get(Keys.USER);
+
     const handle = (action : any) => {
         console.log(props.author);
-        console.log(props.author.icon);
-        let user = storageService.get(Keys.USER);
         if (user){
             user.icon = props.author;
-        }
-        storageService.set(Keys.USER, user);
-        if(action){
-            action(props.author.id);
+            storageService.set(Keys.USER, user);
+            if(action){
+                action(props.author.id);
+            }
+            history.push('/game');
+        }else{
+            console.log("No se ha creado un usuario")
+            history.push('/');
         }
     }
     return <>
