@@ -5,6 +5,7 @@ import './App.css';
 import {LoginPage} from "./pages/login/login";
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import {CreateUserPage} from "./pages/createUser/createUser";
+import {PageNotFound} from "./pages/pageNotFound/pageNotFound";
 
 
 function App() {
@@ -13,8 +14,9 @@ function App() {
       <BrowserRouter >
             <Switch>
                 <Route exact path="/game" component={Card}/>
-                <Route exact path='/login' component={LoginPage}/>
+                <Route exact path='/' component={LoginPage}/>
                 <Route exact path='/createUser' component={CreateUserPage}/>
+                <Route component={PageNotFound}/>
             </Switch>
         </BrowserRouter>
       </>

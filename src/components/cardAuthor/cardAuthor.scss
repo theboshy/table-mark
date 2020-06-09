@@ -31,17 +31,18 @@ img {
 
 .title {
   position: absolute;
-  font-family: 'Patrick Hand', cursive;  width: 12em;
-  left: 0;
+  font-family: 'Kranky', cursive;
+  width: 12em;
   top: 10.8em;
   font-weight: 700;
   font-size: 30px;
   text-align: center;
   text-transform: uppercase;
   color: white;
-  background: rgba(67, 56, 24, .9);
+  background: rgba(67, 56, 24, .95);
   z-index: 1;
   transition: top .5s ease;
+  border-radius: 20px;
 }
 
 .container:hover .title {
