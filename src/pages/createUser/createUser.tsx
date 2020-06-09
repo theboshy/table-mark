@@ -1,7 +1,7 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import {User} from "../../models/user";
 import {StorageService} from "../../services/save.local.storage";
-import {Keys} from "../../enums";
+import {Keys} from "../../keys";
 //Imports of material-ui
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';

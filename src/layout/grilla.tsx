@@ -9,7 +9,7 @@ export const Grilla = (props: any) => {
         let authors = author;
         let cards: JSX.Element[] =  [];
         authors.forEach((aut) => {
-            cards.push(<CardAuthor action={props.action} author={aut}/>)
+            cards.push(<CardAuthor action={props.action} author={aut} key={aut.id}/>)
         });
         return cards;
     }

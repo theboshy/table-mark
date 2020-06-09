@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { writeMachine } from '../../services/save.local.machine';
 import {SendEmail} from "../../services/send.email";
 import {User} from '../../models/user';
-import {Keys} from '../../enums';
+import {Keys} from '../../keys';
 export const LoginPage = (props: any) => {
     const [userName, setUserName] = useState('');
     const history = useHistory();
@@ -21,17 +21,18 @@ export const LoginPage = (props: any) => {
      */
     const handle = (e: any) => {
         //sendEmail.sendEmail(e, user);
+        
         if((user = storageService.get(Keys.USER)) != null){ //There is a user created
             console.log("There is a user!");
             console.log(user);
-
+            history.push('/game');
         } else{
             let userJson = User;
             userJson.name = userName;
             user = userJson;
             storageService.set(Keys.USER, user);
+            history.push('/createUser')
         }
-        history.push('/game');
     }
 
     const text = 'Lorem Ipsum er ganske enkelt dummy tekst fra trykkeri- og typebransjen. Lorem Ipsum har vært bransjens standard dummy-tekst helt siden 1500-tallet, da en ukjent skriver tok en bysse av typen og krypset den for å lage en type eksemplarbok. Det har overlevd ikke bare fem århundrer, men også spranget til elektronisk setting, og forblir i hovedsak uendret. Det ble popularisert på 1960-tallet med utgivelsen av Letraset-ark som inneholder Lorem Ipsum-passasjer, og mer nylig med desktop-publiseringsprogramvare som Aldus PageMaker inkludert versjoner av Lorem Ipsum.';
