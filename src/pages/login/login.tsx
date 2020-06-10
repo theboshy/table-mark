@@ -89,7 +89,7 @@ export const LoginPage = (props: any) => {
                             src="https://ep00.epimg.net/cultura/imagenes/2013/06/15/actualidad/1371283072_174122_1371283573_noticia_normal.jpg"/>
                     </span>
             </div>
-            <div className="margin">
+            <div className="login-container">
                 <form>
                     {(() => {
                         if (user == null) {
