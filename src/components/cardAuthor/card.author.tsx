@@ -9,16 +9,19 @@ export const CardAuthor = (props: any) => {
         if (user){
             user.icon = props.author;
         }
+
         storageService.set('__user_name', user);
         if(action){
             action(props.author.id);
         }
     }
     return <>
+
         <div className="container" onClick={() => handle(props.action)}>
             <img src={props.author.imagen} alt="" />
             <p className="title">{props.author.name}</p>
             <div className="overlay"></div>
+
         </div>
     </>
 };
