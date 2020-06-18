@@ -1,37 +1,57 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import './loginStyle.scss';
 import {StorageService} from '../../services/save.local.storage';
-import { useHistory } from 'react-router-dom';
-import { writeMachine } from '../../services/save.local.machine';
+import {useHistory} from 'react-router-dom';
+import {writeMachine} from '../../services/save.local.machine';
 import {SendEmail} from "../../services/send.email";
 import {User} from '../../models/user';
-import {Keys} from '../../enums';
+import {Keys} from '../../keys';
+
 export const LoginPage = (props: any) => {
     const [userName, setUserName] = useState('');
+    const [visible, setVisible] = useState(false);
     const history = useHistory();
     const sendEmail = new SendEmail();
     const storageService = new StorageService();
 
     let user = User;
+    user = storageService.get(Keys.USER);
 
     const wF = new writeMachine();
     /**
      * Button handler ("Entrar").
      * @param e event
      */
-    const handle = (e: any) => {
+    const handleEnter = (e: any) => {
         //sendEmail.sendEmail(e, user);
-        if((user = storageService.get(Keys.USER)) != null){ //There is a user created
+
+        if ((user != null)) { //There is a user created
             console.log("There is a user!");
             console.log(user);
-
-        } else{
+            if (user.icon != "") {
+                history.push('/game');
+            } else {
+                history.push('/createUser')
+            }
+        } else {
             let userJson = User;
             userJson.name = userName;
             user = userJson;
             storageService.set(Keys.USER, user);
+            history.push('/createUser')
         }
-        history.push('/game');
+
+    }
+
+    /**
+     * Button handler for change the user name
+     * @param e Event
+     */
+    const handleChangeName = (e: any) => {
+        user.name = userName;
+        storageService.set(Keys.USER, user);
+        setVisible(false);
+        console.log("User name has been changed")
     }
 
     const text = 'Lorem Ipsum er ganske enkelt dummy tekst fra trykkeri- og typebransjen. Lorem Ipsum har vært bransjens standard dummy-tekst helt siden 1500-tallet, da en ukjent skriver tok en bysse av typen og krypset den for å lage en type eksemplarbok. Det har overlevd ikke bare fem århundrer, men også spranget til elektronisk setting, og forblir i hovedsak uendret. Det ble popularisert på 1960-tallet med utgivelsen av Letraset-ark som inneholder Lorem Ipsum-passasjer, og mer nylig med desktop-publiseringsprogramvare som Aldus PageMaker inkludert versjoner av Lorem Ipsum.';
@@ -42,47 +62,72 @@ export const LoginPage = (props: any) => {
     const text6 = 'Vivamus a scelerisque eros. Curabitur in ex nunc. Donec non felis ac libero auctor ornare vitae sit amet lectus. Nulla sagittis condimentum augue, vel commodo augue gravida sit amet.';
 
     return <>
-        <div className="container-fluid wiki-search">
-            <section>
-            <form>
-                   <div className="inputGroup inputGroup2">
-                    <label htmlFor="password">Nombre de usuario</label>
-                    <input type="text" id="nombre_usuario" className="password"
-                           onChange={(e)=>setUserName(e.target.value)}/>
-
-                </div>
-                <div className="inputGroup inputGroup3">
-                    <button id="login" onClick={(e) => handle(e)}>Entrar</button>
-                </div>
-            </form>
-            </section>
-            <section>
+        <div className="container-all">
             <div className="book">
+                    <span className="page turn">
+                        {text}
+                    </span>
                 <span className="page turn">
-                    {text}
-                </span>
+                        {text2}
+                    </span>
                 <span className="page turn">
-                    {text2}
-                </span>
+                        {text3}
+                    </span>
                 <span className="page turn">
-                    {text3}
-                </span>
+                        {text4}
+                    </span>
                 <span className="page turn">
-                    {text4}
-                </span>
+                        {text5}
+                    </span>
                 <span className="page turn">
-                    {text5}
-                </span>
-                <span className="page turn">
-                    {text6}
-                </span>
+                        {text6}
+                    </span>
                 <span className="cover"></span>
                 <span className="page"></span>
                 <span className="cover turn">
-                    <img src="https://ep00.epimg.net/cultura/imagenes/2013/06/15/actualidad/1371283072_174122_1371283573_noticia_normal.jpg"/>
-                </span>
+                        <img
+                            src="https://ep00.epimg.net/cultura/imagenes/2013/06/15/actualidad/1371283072_174122_1371283573_noticia_normal.jpg"/>
+                    </span>
             </div>
-            </section>
+            <div className="login-container">
+                <form>
+                    {(() => {
+                        if (user == null) {
+                            return <div className="inputGroup inputGroup2">
+                                <label htmlFor="password">Nombre de usuario</label>
+                                <input type="text" id="nombre_usuario" className="password"
+                                       onChange={(e) => setUserName(e.target.value)}/>
+                            </div>
+                        } else {
+                            return <div className="divNameLabel">
+                                <label className="labelName" htmlFor="password">Usuario: {user.name}</label>
+                            </div>
+                        }
+                    })()}
+                    <div className="inputGroup inputGroup3">
+                        <button id="login" onClick={(e) => handleEnter(e)}>Entrar</button>
+                    </div>
+                    {(() => {
+                        if (user != null && visible) {
+                            return <>
+                                <div className="inputGroup inputGroup2">
+                                    <label htmlFor="password">Cambiar nombre de usuario</label>
+                                    <input type="text" id="change-user-name" className="password"
+                                           onChange={(e) => setUserName(e.target.value)}/>
+                                </div>
+                                <div className="inputGroup inputGroup3">
+                                    <button id="btn-change" onClick={(e) => handleChangeName(e)}>Cambiar</button>
+                                </div>
+                            </>
+                        }
+                        if (user != null && !visible) {
+                            return <div className="inputGroup inputGroup3">
+                                <button id="changeName" onClick={() => setVisible(true)}>Cambiar nombre</button>
+                            </div>
+                        }
+                    })()}
+                </form>
+            </div>
         </div>
     </>
 }
