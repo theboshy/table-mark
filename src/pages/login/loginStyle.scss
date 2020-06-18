@@ -75,6 +75,13 @@ button {
   border:none;
 }
 
+.layoutContainer{
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: 0;
+  justify-content: space-around;
+}
+
 body {
   background-image: url(https://image.freepik.com/foto-gratis/mesa-madera-fondo-borroso_1134-14.jpg);
   background-size: 100% 100%;

@@ -15,3 +15,380 @@ td[data-value='false'] {
 td[data-selected='true'] {
   opacity: .5;
 }
+
+.layoutContainer{
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: 0;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.level-section{
+  width: 200px;
+  height: 200px;
+  border: 2px solid red;
+  padding: 2em 2em;
+  margin: 2em;
+}
+
+body{
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+.container{
+  width: 100vmin;
+  height: 100vmin;
+  position: relative;
+  margin: 0 auto;
+}
+.scene{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/127738/city_camera.svg);
+  background-size:100% 100%;
+}
+svg{
+  width: 100px;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background:white;
+}
+path{
+  fill:none;
+  stroke:black;
+}
+circle{
+  fill:red;
+}
+
+.center{
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: calc(50% - 5px);
+  left: calc(50% - 5px);
+  background:red;
+  border-radius: 50%;
+}
+
+
+// INSTRUCTION
+// Just go to the white block below
+// Please do not look at the map (at the bottom of Javascript source code). It's cheating.
+//
+// CONTROLS
+// UP arrow key    = JUMP
+// LEFT arrow key  = MOVE TO LEFT
+// RIGHT arrow key = MOVE TO RIGHT
+
+$white: #ffffff;
+$grey: #8f8f8f;
+$black: #000000;
+$background-color-1: #00bfff;
+$background-color-2: #87ceeb;
+$ground-1: #a0522d;
+$ground-2: #cd853F;
+$lawn: #228b22;
+$block-1: #696969;
+$block-2: #c0c0c0;
+$block-3: #808080;
+
+// VARIABLES
+$grid-size: 40px;
+$move-time: 0.1s;
+
+// CHARACTER PIXEL ART START
+$pixdiv : 16;
+$pixel: $grid-size / $pixdiv;
+
+@function pixel($pixel, $x, $y, $flip) {
+  @if ($flip) {
+    @return ($pixel * ($pixdiv - 1 - $x)) ($pixel * $y) $black
+  }
+  @else {
+    @return ($pixel * $x) ($pixel * $y) $black
+  }
+}
+
+@function pixel-common($pixel, $flip) {
+  @return
+    // pixel($pixel,  15,  0),
+          pixel($pixel,  4,  4, $flip),
+          pixel($pixel,  5,  4, $flip),
+          pixel($pixel,  6,  4, $flip),
+          pixel($pixel,  7,  4, $flip),
+          pixel($pixel,  8,  4, $flip),
+          pixel($pixel,  9,  4, $flip),
+          pixel($pixel, 10,  4, $flip),
+          pixel($pixel, 11,  4, $flip),
+          pixel($pixel,  3,  5, $flip),
+          pixel($pixel,  4,  5, $flip),
+          pixel($pixel,  5,  5, $flip),
+          pixel($pixel,  6,  5, $flip),
+          pixel($pixel,  7,  5, $flip),
+          pixel($pixel,  8,  5, $flip),
+          pixel($pixel,  9,  5, $flip),
+          pixel($pixel, 10,  5, $flip),
+          pixel($pixel, 11,  5, $flip),
+          pixel($pixel, 12,  5, $flip),
+          pixel($pixel,  3,  6, $flip),
+          pixel($pixel,  4,  6, $flip),
+          pixel($pixel,  6,  6, $flip),
+          pixel($pixel,  7,  6, $flip),
+          pixel($pixel,  8,  6, $flip),
+          pixel($pixel,  9,  6, $flip),
+          pixel($pixel, 10,  6, $flip),
+          pixel($pixel, 11,  6, $flip),
+          pixel($pixel, 12,  6, $flip),
+          pixel($pixel,  3,  7, $flip),
+          pixel($pixel,  4,  7, $flip),
+          pixel($pixel,  5,  7, $flip),
+          pixel($pixel,  6,  7, $flip),
+          pixel($pixel,  7,  7, $flip),
+          pixel($pixel,  8,  7, $flip),
+          pixel($pixel,  9,  7, $flip),
+          pixel($pixel, 10,  7, $flip),
+          pixel($pixel, 11,  7, $flip),
+          pixel($pixel, 12,  7, $flip),
+          pixel($pixel,  3,  8, $flip),
+          pixel($pixel,  4,  8, $flip),
+          pixel($pixel,  5,  8, $flip),
+          pixel($pixel,  6,  8, $flip),
+          pixel($pixel,  7,  8, $flip),
+          pixel($pixel,  8,  8, $flip),
+          pixel($pixel,  9,  8, $flip),
+          pixel($pixel, 10,  8, $flip),
+          pixel($pixel, 11,  8, $flip),
+          pixel($pixel, 12,  8, $flip),
+          pixel($pixel,  4,  9, $flip),
+          pixel($pixel,  5,  9, $flip),
+          pixel($pixel,  6,  9, $flip),
+          pixel($pixel,  5, 10, $flip),
+          pixel($pixel,  6, 10, $flip),
+          pixel($pixel,  7, 10, $flip),
+          pixel($pixel,  8, 10, $flip),
+          pixel($pixel,  9, 10, $flip),
+          pixel($pixel,  7, 11, $flip),
+          pixel($pixel,  8, 11, $flip),
+          pixel($pixel,  6, 12, $flip),
+          pixel($pixel,  7, 12, $flip),
+          pixel($pixel,  8, 12, $flip),
+          pixel($pixel,  3, 13, $flip),
+          pixel($pixel,  4, 13, $flip),
+          pixel($pixel,  5, 13, $flip),
+          pixel($pixel,  6, 13, $flip),
+          pixel($pixel,  7, 13, $flip),
+          pixel($pixel,  8, 13, $flip);
+}
+
+@mixin pixel-0($pixel, $flip) {
+  box-shadow:
+          pixel-common($pixel, $flip),
+          pixel($pixel, 6, 14, $flip),
+          pixel($pixel, 8, 14, $flip),
+          pixel($pixel, 6, 15, $flip),
+          pixel($pixel, 7, 15, $flip),
+          pixel($pixel, 8, 15, $flip),
+          pixel($pixel, 9, 15, $flip);
+}
+
+@mixin pixel-1($pixel, $flip) {
+  box-shadow:
+          pixel-common($pixel, $flip),
+          pixel($pixel, 6, 14, $flip),
+          pixel($pixel, 8, 14, $flip),
+          pixel($pixel, 9, 14, $flip),
+          pixel($pixel, 6, 15, $flip),
+          pixel($pixel, 7, 15, $flip);
+}
+
+@mixin pixel-2($pixel, $flip) {
+  box-shadow:
+          pixel-common($pixel, $flip),
+          pixel($pixel, 6, 14, $flip),
+          pixel($pixel, 7, 14, $flip),
+          pixel($pixel, 8, 14, $flip),
+          pixel($pixel, 8, 15, $flip),
+          pixel($pixel, 9, 15, $flip);
+}
+
+@mixin character($size, $pixel, $flip) {
+  width: $size;
+  height: $size;
+  position: absolute;
+  transition: top 0.1s ease-in, left 0.15s;
+  &:before {
+    @include pixel-0($pixel, $flip);
+    content: '';
+    width: $pixel;
+    height: $pixel;
+    position: absolute;
+    &.move {
+      animation: character-move 0.5s infinite;
+    }
+  }
+}
+// CHARACTER PIXEL ART END
+
+// CSS LOOP START
+$classes: (
+        'ground': (
+                'bg': (
+                        linear-gradient(
+                                        to top right,
+                                        $ground-1 0%  25%,
+                                        $ground-2 25% 50%,
+                                        $ground-1 50% 75%,
+                                        $ground-2 75% 100%
+                        )
+                ),
+                'bg-type': 'image'
+        ),
+        'lawn': (
+                'bg': (
+                        linear-gradient(to bottom, $lawn 0% 25%, transparent 25% 100%),
+                        linear-gradient(
+                                        to top right,
+                                        $ground-1 0%  25%,
+                                        $ground-2 25% 50%,
+                                        $ground-1 50% 75%,
+                                        $ground-2 75% 100%
+                        )
+                ),
+                'bg-type': 'image'
+        ),
+        'block': (
+                'bg': (
+                        linear-gradient(to bottom, $block-1 0% 2% , transparent 2%  98%, $block-1 98% 100%),
+                        linear-gradient(to right , $block-1 0% 2% , transparent 2%  98%, $block-1 98% 100%),
+                        linear-gradient(to bottom, $block-2 0 10%, transparent 10% 100%),
+                        linear-gradient(to right , $block-2 0 10%, transparent 10% 100%),
+                        linear-gradient($block-3 0 100%)
+                ),
+                'bg-type': image
+        ),
+        'finish': (
+                'bg': transparent,
+                'bg-type': image
+        ),
+        'space': (
+                'bg': transparent,
+                'bg-type': color
+        )
+);
+
+@mixin common($bg, $bg-type, $grid-size) {
+  background-#{$bg-type}: $bg;
+  background-size: $grid-size;
+  width: $grid-size;
+  height: $grid-size;
+}
+
+@each $class-name, $class in $classes {
+  $bg: map-get($class, 'bg');
+  $bg-type: map-get($class, 'bg-type');
+
+  .#{$class-name} {
+    @include common($bg, $bg-type, $grid-size);
+  }
+}
+// CSS LOOP END
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #1f1f1f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.container {
+  background-color: #ffffff;
+  width: $grid-size * 10;
+  height: $grid-size * 10;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  flex-grow: 0;
+  .screen {
+    width: $grid-size * 10;
+    height: $grid-size * 15;
+    display: grid;
+    grid-template-rows: repeat(10, $grid-size);
+    position: absolute;
+    top: 0;
+    transition: top 0.3s;
+    .row {
+      display: grid;
+      grid-template-columns: repeat(10, $grid-size);
+      .col {
+        width: $grid-size;
+        height: $grid-size;
+      }
+    }
+    .character {
+      @include character($grid-size, $grid-size / $pixdiv, false);
+      &.hide {
+        visibility: hidden;
+      }
+      &.flip:not(.dead) {
+        @include character($grid-size, $grid-size / $pixdiv, true);
+      }
+      &.move:not(.dead):before {
+        animation: character-move 0.3s infinite;
+      }
+      &.move.flip:not(.dead):before {
+        animation: character-move-flip 0.3s infinite;
+      }
+      &.dead {
+        transform: rotate(-90deg);
+      }
+    }
+    &.active {
+      background-image: linear-gradient(to bottom, $background-color-1, $background-color-2);
+    }
+  }
+}
+
+@mixin character-move($flip) {
+  $character-move: '';
+
+  @if ($flip) {
+    $character-move: character-move-flip;
+  }
+  @else {
+    $character-move: character-move;
+  }
+  @keyframes #{$character-move} {
+    0%        { @include pixel-1($grid-size / $pixdiv, $flip); }
+    24.99999% { @include pixel-1($grid-size / $pixdiv, $flip); }
+    25%       { @include pixel-0($grid-size / $pixdiv, $flip); }
+    49.99999% { @include pixel-0($grid-size / $pixdiv, $flip); }
+    50%       { @include pixel-2($grid-size / $pixdiv, $flip); }
+    74.99999% { @include pixel-2($grid-size / $pixdiv, $flip); }
+    75%       { @include pixel-0($grid-size / $pixdiv, $flip); }
+    99.99999% { @include pixel-0($grid-size / $pixdiv, $flip); }
+    100%      { @include pixel-1($grid-size / $pixdiv, $flip); }
+  }
+}
+
+@include character-move(false);
+@include character-move(true);
