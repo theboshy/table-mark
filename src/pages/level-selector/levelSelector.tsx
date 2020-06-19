@@ -29,28 +29,19 @@ export const LevelSelectorPage = (props: any)=>{
 
         let a = 4;
         let s = 10;
-        let b = 10;
-        let r = 10;
+        let b = 50;
+        let r = 50;
         let p = Math.floor(c.offsetWidth / b);
         let q = a * p;
         let u = w - q;
-        let m = [
-            ['S', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            ['*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' ', ' '],
-            ['*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', '*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' '],
-            [' ', '*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            ['*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' ', ' '],
-            ['*', ' ', '*', '*', '*', 'L', '*', '*', ' ', '*', ' ', ' '],
-            ['*', ' ', ' ', '*', '*', ' ', '*', '*', '*', '*', ' ', ' '],
-            ['*', '*', ' ', 'X', '*', ' ', ' ', ' ', ' ', '*', ' ', ' '],
-            ['*', ' ', ' ', '*', '*', '*', '*', '*', 'X', '*', ' ', ' '],
-            ['*', ' ', '*', ' ', ' ', ' ', ' ', '*', ' ', '*', ' ', ' '],
-            ['*', ' ', ' ', ' ', '#', '#', ' ', 'L', ' ', '*', ' ', ' '],
-            ['#', '#', '#', '#', 'H', 'H', '#', '#', 'O', '#', ' ', ' '],
-        ];
+        let m = new Array<Array<any>>();
+        for (let h = 0 ; h < 10; h++) {
+            m[h] = [];
+            for (let y = 0; y < 10; y++) {
+                m[h][y] = '*';
+            }
+        }
+
         let z = new Game(c, v, m, a, s, b, r, u, w, h, f);
 
         z.initialize();
@@ -58,7 +49,16 @@ export const LevelSelectorPage = (props: any)=>{
     }
 
     const list = () => {
-        let list = JSX.Element[];
+        let list: JSX.Element[] =  [];
+        let quarters: JSX.Element[] =  [];
+        for (let i = 0;i< 10; i++) {
+            for (let e = 0;e < 10; e++) {
+                quarters.push(<div key={'s' + e + i} className="col" data-game-col={e}></div>);
+            }
+            quarters = [];
+            list.push(<div key={'s' + i} className="row" data-game-row={i}>{quarters}</div>)
+        }
+        return list;
     }
 
     /*<div className='layoutContainer'>
@@ -68,186 +68,7 @@ export const LevelSelectorPage = (props: any)=>{
         <button onClick={() => initializeGame()}>Presioname no mms</button>
         <div className="container">
             <div className="screen" id="viewbox">
-                <div className="row" data-game-row="0">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="1">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="2">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="3">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="4">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="5">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="6">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="7">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="8">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="9">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="10">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="11">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="12">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="13">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
-                <div className="row" data-game-row="14">
-                    <div className="col" data-game-col="0"></div>
-                    <div className="col" data-game-col="1"></div>
-                    <div className="col" data-game-col="2"></div>
-                    <div className="col" data-game-col="3"></div>
-                    <div className="col" data-game-col="4"></div>
-                    <div className="col" data-game-col="5"></div>
-                    <div className="col" data-game-col="6"></div>
-                    <div className="col" data-game-col="7"></div>
-                    <div className="col" data-game-col="8"></div>
-                    <div className="col" data-game-col="9"></div>
-                </div>
+                {list()}
                 <div className="character hide" id="character"></div>
             </div>
         </div>
