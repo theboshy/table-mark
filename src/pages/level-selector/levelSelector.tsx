@@ -35,21 +35,21 @@ export const LevelSelectorPage = (props: any)=>{
         let q = a * p;
         let u = w - q;
         let m = [
-            ['*', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'],
-            ['*', ' ', '*', '*', '*', '*', '*', '*', ' ', '*'],
-            ['*', ' ', '*', ' ', ' ', ' ', ' ', '*', ' ', '*'],
-            ['*', ' ', '*', ' ', '*', '*', ' ', '*', ' ', '*'],
-            ['*', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', '*'],
-            ['*', '*', '*', '*', '*', '*', '*', '*', ' ', '*'],
-            ['*', 'X', ' ', '*', ' ', ' ', ' ', '*', ' ', '*'],
-            ['*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'],
-            ['*', ' ', '*', '*', '*', 'L', '*', '*', ' ', '*'],
-            ['*', ' ', ' ', '*', '*', ' ', '*', '*', '*', '*'],
-            ['*', '*', ' ', 'X', '*', ' ', ' ', ' ', ' ', '*'],
-            ['*', ' ', ' ', '*', '*', '*', '*', '*', 'X', '*'],
-            ['*', ' ', '*', ' ', ' ', ' ', ' ', '*', ' ', '*'],
-            ['*', ' ', ' ', ' ', '#', '#', ' ', 'L', ' ', '*'],
-            ['#', '#', '#', '#', 'H', 'H', '#', '#', 'O', '#']
+            ['S', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            ['*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' ', ' '],
+            ['*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', '*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' '],
+            [' ', '*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            ['*', '*', '*', '*', '*', '*', '*', '*', '*', ' ', ' ', ' '],
+            ['*', ' ', '*', '*', '*', 'L', '*', '*', ' ', '*', ' ', ' '],
+            ['*', ' ', ' ', '*', '*', ' ', '*', '*', '*', '*', ' ', ' '],
+            ['*', '*', ' ', 'X', '*', ' ', ' ', ' ', ' ', '*', ' ', ' '],
+            ['*', ' ', ' ', '*', '*', '*', '*', '*', 'X', '*', ' ', ' '],
+            ['*', ' ', '*', ' ', ' ', ' ', ' ', '*', ' ', '*', ' ', ' '],
+            ['*', ' ', ' ', ' ', '#', '#', ' ', 'L', ' ', '*', ' ', ' '],
+            ['#', '#', '#', '#', 'H', 'H', '#', '#', 'O', '#', ' ', ' '],
         ];
         let z = new Game(c, v, m, a, s, b, r, u, w, h, f);
 
@@ -57,6 +57,9 @@ export const LevelSelectorPage = (props: any)=>{
         }
     }
 
+    const list = () => {
+        let list = JSX.Element[];
+    }
 
     /*<div className='layoutContainer'>
             {cards()}
@@ -322,6 +325,11 @@ class Game {
         }
     }
 
+
+    changeLvl() {
+        this.position.x+=38;
+    }
+
     collidable(o: string) {
         if (o === '*' || o === '#' || o === 'H') {
             return true;
@@ -488,21 +496,21 @@ class Game {
             let b = document.body;
 
             b.addEventListener('keydown', (e) => {
-                if (e.keyCode === 38 && this.activeKeyY === null && this.onLand === true) {
-                    this.activeKeyY = 38;
+                 if (e.keyCode === 40) {
+                    this.position.y += 38;
                     this.jumpSpeed  = Math.floor(this.height * -0.7);
                 }
                 else if ((e.keyCode === 37 || e.keyCode === 39) && this.activeKeyX === null) {
                     this.activeKeyX = e.keyCode;
+                    this.jumpSpeed  = Math.floor(this.height * -0.7);
                     this.animateCharacter('show');
                 }
             });
 
             b.addEventListener('keyup', (e) => {
+                this.animateCharacter('hide');
                 if (e.keyCode === 37 || e.keyCode === 39) {
                     this.activeKeyX = null;
-
-                    this.animateCharacter('hide');
                 }
                 else if (e.keyCode === 38) {
                     this.activeKeyY = null;
@@ -541,8 +549,11 @@ class Game {
                 else if (m[i][j] === '*' || m[i][j] === 'L') {
                     c.classList.add('block');
                 }
-                else if (m[i][j] === ' ' || m[i][j] === 'X') {
+                else if (m[i][j] === ' ') {
                     c.classList.add('space');
+                }
+                else if(m[i][j] === 'X') {
+                    c.classList.add('lvl');
                 }
                 else if (m[i][j] === 'S') {
                     this.position = {x: j * w, y: i * h};
@@ -567,9 +578,9 @@ class Game {
         let a = m.activeKeyX;
         let x = m.position.x;
         let y = m.position.y;
-
+        window.requestAnimationFrame(m.render.bind(m));
         setTimeout(() => {
-            window.requestAnimationFrame(m.render.bind(m));
+
         }, 1000 / m.fps);
 
         if (a !== null) {

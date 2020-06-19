@@ -103,6 +103,7 @@ $lawn: #228b22;
 $block-1: #696969;
 $block-2: #c0c0c0;
 $block-3: #808080;
+$LVL: RED;
 
 // VARIABLES
 $grid-size: 40px;
@@ -285,7 +286,17 @@ $classes: (
         'space': (
                 'bg': transparent,
                 'bg-type': color
-        )
+        ),
+        'lvl': (
+        'bg': (
+                linear-gradient(to bottom, $block-1 0% 2% , transparent 2%  98%, $block-1 98% 100%),
+                linear-gradient(to right , $block-1 0% 2% , transparent 2%  98%, $block-1 98% 100%),
+                linear-gradient(to bottom, $block-2 0 10%, transparent 10% 100%),
+                linear-gradient(to right , $block-2 0 10%, transparent 10% 100%),
+                linear-gradient($LVL 0 100%)
+        ),
+        'bg-type': image
+      )
 );
 
 @mixin common($bg, $bg-type, $grid-size) {
