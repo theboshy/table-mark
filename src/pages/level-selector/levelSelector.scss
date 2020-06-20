@@ -16,7 +16,7 @@
 
 $white: #ffffff;
 $grey: #8f8f8f;
-$black: #C0C0C0;
+$black: #271C01;
 $background-image: url(https://img2.rtve.es/a/4950706?w=1600&preview=1548339808131.jpg);
 $ground-1: #a0522d;
 $ground-2: #cd853F;
@@ -49,45 +49,48 @@ $pixel: $grid-size / $pixdiv;
           //Cabeza dinosaurio
 
           //línea derecha
-          pixel($pixel, 1, 1, $flip),
-          pixel($pixel, 1, 2, $flip),
-          pixel($pixel, 1, 3, $flip),
-          pixel($pixel, 1, 4, $flip),
-          pixel($pixel, 1, 5, $flip),
-          pixel($pixel, 1, 6, $flip),
-          pixel($pixel, 1, 7, $flip),
-          pixel($pixel, 1, 8, $flip),
-          pixel($pixel, 1, 9, $flip),
-          pixel($pixel, 1, 10, $flip),
-          pixel($pixel, 1, 11, $flip),
-          //línea izquierda
-          pixel($pixel, 14, 1, $flip),
-          pixel($pixel, 14, 2, $flip),
-          pixel($pixel, 14, 3, $flip),
-          pixel($pixel, 14, 4, $flip),
-          pixel($pixel, 14, 5, $flip),
-          pixel($pixel, 14, 6, $flip),
-          pixel($pixel, 14, 7, $flip),
-          pixel($pixel, 14, 8, $flip),
-          pixel($pixel, 14, 9, $flip),
-          pixel($pixel, 14, 10, $flip),
-          pixel($pixel, 14, 11, $flip),
-          //línea arriba
-          pixel($pixel, 2, 1, $flip),
-          pixel($pixel, 3, 1, $flip),
-          pixel($pixel, 4, 1, $flip),
-          pixel($pixel, 5, 1, $flip),
-          pixel($pixel, 6, 1, $flip),
-          pixel($pixel, 7, 1, $flip),
-          pixel($pixel, 8, 1, $flip),
-          pixel($pixel, 9, 1, $flip),
-          pixel($pixel, 10, 1, $flip),
-          pixel($pixel, 11, 1, $flip),
-          pixel($pixel, 12, 1, $flip),
-          pixel($pixel, 13, 1, $flip),
+          //pixel($pixel, 1, 1, $flip),
+          //pixel($pixel, 1, 2, $flip),
+          //pixel($pixel, 1, 3, $flip),
+          //pixel($pixel, 1, 4, $flip),
+          //pixel($pixel, 1, 5, $flip),
+          //pixel($pixel, 1, 6, $flip),
+          //pixel($pixel, 1, 7, $flip),
+          //pixel($pixel, 1, 8, $flip),
+          //pixel($pixel, 1, 9, $flip),
+          //pixel($pixel, 1, 10, $flip),
+          //pixel($pixel, 1, 11, $flip),
+          ////línea izquierda
+          //pixel($pixel, 14, 1, $flip),
+          //pixel($pixel, 14, 2, $flip),
+          //pixel($pixel, 14, 3, $flip),
+          //pixel($pixel, 14, 4, $flip),
+          //pixel($pixel, 14, 5, $flip),
+          //pixel($pixel, 14, 6, $flip),
+          //pixel($pixel, 14, 7, $flip),
+          //pixel($pixel, 14, 8, $flip),
+          //pixel($pixel, 14, 9, $flip),
+          //pixel($pixel, 14, 10, $flip),
+          //pixel($pixel, 14, 11, $flip),
+          ////línea arriba
+          //pixel($pixel, 2, 1, $flip),
+          //pixel($pixel, 3, 1, $flip),
+          //pixel($pixel, 4, 1, $flip),
+          //pixel($pixel, 5, 1, $flip),
+          //pixel($pixel, 6, 1, $flip),
+          //pixel($pixel, 7, 1, $flip),
+          //pixel($pixel, 8, 1, $flip),
+          //pixel($pixel, 9, 1, $flip),
+          //pixel($pixel, 10, 1, $flip),
+          //pixel($pixel, 11, 1, $flip),
+          //pixel($pixel, 12, 1, $flip),
+          //pixel($pixel, 13, 1, $flip),
           //piernas
           pixel($pixel, 6, 12, $flip),
+          pixel($pixel, 7, 12, $flip),
+          pixel($pixel, 5, 12, $flip),
           pixel($pixel, 8, 12, $flip),
+          pixel($pixel, 9, 12, $flip),
           pixel($pixel, 6, 13, $flip),
           pixel($pixel, 8, 13, $flip);
 }
@@ -126,11 +129,11 @@ $pixel: $grid-size / $pixdiv;
   position: absolute;
   transition: top 0.1s ease-in, left 0.15s;
   background: {
-    image: url("/../../resources/authors_images/authors_images/gabriela_mistral.png") ;
-    size: 100%;
+    //image: url("/../../resources/authors_images/authors_images/gabriela_mistral.png") ;
+    size: 80%;
     repeat: no-repeat;
   }
-  background-position: 100%;
+  background-position: 50% 0;
   &:before {
     @include pixel-0($pixel, $flip);
     content: '';

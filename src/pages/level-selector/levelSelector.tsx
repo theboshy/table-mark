@@ -3,7 +3,10 @@ import './levelSelector.scss'
 import {CardAuthor} from "../../components/cardAuthor/card.author";
 import author from "../../mocks/authors.json";
 import {TimelineMax, TweenMax} from "gsap";
+import {StorageService} from "../../services/save.local.storage";
+import {Keys} from "../../keys";
 
+const storageService = new StorageService();
 export const LevelSelectorPage = (props: any) => {
 
     const refLine = React.createRef();
@@ -283,7 +286,8 @@ class Game {
 
     renderCharacter() {
         let c = this.character;
-
+        c.style.backgroundImage = "url("+storageService.get(Keys.USER).icon.icon+")";
+        console.log(storageService.get(Keys.USER).icon.icon);
         c.style.top = this.position.y + 'px';
         c.style.left = this.position.x + 'px';
     }
