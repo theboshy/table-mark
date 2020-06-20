@@ -25,11 +25,12 @@ export const LevelSelectorPage = (props: any) => {
         let w;
         let h;
         if (c instanceof HTMLElement) {
+            console.log("Tamaño del caracter es " +c.offsetWidth)
             w = c.offsetWidth;
             h = c.offsetHeight;
 
             let a = 4;
-            let s = 10;
+            let s = 0;
             let b = 50;
             let r = 50;
             let p = Math.floor(c.offsetWidth / b);
@@ -77,7 +78,8 @@ export const LevelSelectorPage = (props: any) => {
         <div className="container-game">
             <div className="screen" id="viewbox">
                 {list()}
-                <div className="character hide" id="character"></div>
+                <div className="character hide" id="character">
+                </div>
             </div>
         </div>
     </>

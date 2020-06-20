@@ -1,82 +1,9 @@
-td {
-  width: 100px;
-  height: 100px;
-  border: 1px solid gray;
-}
-
-td[data-value='true'] {
-  background: green;
-}
-
-td[data-value='false'] {
-  background: red;
-}
-
-td[data-selected='true'] {
-  opacity: .5;
-}
-
-.layoutContainer {
-  display: inline-flex;
-  flex-wrap: wrap;
-  margin: 0;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.level-section {
-  width: 200px;
-  height: 200px;
-  border: 2px solid red;
-  padding: 2em 2em;
-  margin: 2em;
-}
-
 .container-game {
   width: 150vmin;
   height: 150vmin;
   position: relative;
   margin: 2em 0 0 2em;
 }
-
-.scene {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/127738/city_camera.svg);
-  background-size: 100% 100%;
-}
-
-svg {
-  width: 100px;
-  opacity: 0.8;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: white;
-}
-
-path {
-  fill: none;
-  stroke: black;
-}
-
-circle {
-  fill: red;
-}
-
-.center {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  top: calc(50% - 5px);
-  left: calc(50% - 5px);
-  background: red;
-  border-radius: 50%;
-}
-
 
 // INSTRUCTION
 // Just go to the white block below
@@ -89,9 +16,8 @@ circle {
 
 $white: #ffffff;
 $grey: #8f8f8f;
-$black: #000000;
-$background-color-1: #00bfff;
-$background-color-2: #87ceeb;
+$black: #C0C0C0;
+$background-image: url(https://img2.rtve.es/a/4950706?w=1600&preview=1548339808131.jpg);
 $ground-1: #a0522d;
 $ground-2: #cd853F;
 $lawn: #228b22;
@@ -120,71 +46,49 @@ $pixel: $grid-size / $pixdiv;
 
 @function pixel-common($pixel, $flip) {
   @return // pixel($pixel,  15,  0),
-          pixel($pixel, 4, 4, $flip),
-          pixel($pixel, 5, 4, $flip),
-          pixel($pixel, 6, 4, $flip),
-          pixel($pixel, 7, 4, $flip),
-          pixel($pixel, 8, 4, $flip),
-          pixel($pixel, 9, 4, $flip),
-          pixel($pixel, 10, 4, $flip),
-          pixel($pixel, 11, 4, $flip),
-          pixel($pixel, 3, 5, $flip),
-          pixel($pixel, 4, 5, $flip),
-          pixel($pixel, 5, 5, $flip),
-          pixel($pixel, 6, 5, $flip),
-          pixel($pixel, 7, 5, $flip),
-          pixel($pixel, 8, 5, $flip),
-          pixel($pixel, 9, 5, $flip),
-          pixel($pixel, 10, 5, $flip),
-          pixel($pixel, 11, 5, $flip),
-          pixel($pixel, 12, 5, $flip),
-          pixel($pixel, 3, 6, $flip),
-          pixel($pixel, 4, 6, $flip),
-          pixel($pixel, 6, 6, $flip),
-          pixel($pixel, 7, 6, $flip),
-          pixel($pixel, 8, 6, $flip),
-          pixel($pixel, 9, 6, $flip),
-          pixel($pixel, 10, 6, $flip),
-          pixel($pixel, 11, 6, $flip),
-          pixel($pixel, 12, 6, $flip),
-          pixel($pixel, 3, 7, $flip),
-          pixel($pixel, 4, 7, $flip),
-          pixel($pixel, 5, 7, $flip),
-          pixel($pixel, 6, 7, $flip),
-          pixel($pixel, 7, 7, $flip),
-          pixel($pixel, 8, 7, $flip),
-          pixel($pixel, 9, 7, $flip),
-          pixel($pixel, 10, 7, $flip),
-          pixel($pixel, 11, 7, $flip),
-          pixel($pixel, 12, 7, $flip),
-          pixel($pixel, 3, 8, $flip),
-          pixel($pixel, 4, 8, $flip),
-          pixel($pixel, 5, 8, $flip),
-          pixel($pixel, 6, 8, $flip),
-          pixel($pixel, 7, 8, $flip),
-          pixel($pixel, 8, 8, $flip),
-          pixel($pixel, 9, 8, $flip),
-          pixel($pixel, 10, 8, $flip),
-          pixel($pixel, 11, 8, $flip),
-          pixel($pixel, 12, 8, $flip),
-          pixel($pixel, 4, 9, $flip),
-          pixel($pixel, 5, 9, $flip),
-          pixel($pixel, 6, 9, $flip),
-          pixel($pixel, 5, 10, $flip),
-          pixel($pixel, 6, 10, $flip),
-          pixel($pixel, 7, 10, $flip),
-          pixel($pixel, 8, 10, $flip),
-          pixel($pixel, 9, 10, $flip),
-          pixel($pixel, 7, 11, $flip),
-          pixel($pixel, 8, 11, $flip),
+          //Cabeza dinosaurio
+
+          //línea derecha
+          pixel($pixel, 1, 1, $flip),
+          pixel($pixel, 1, 2, $flip),
+          pixel($pixel, 1, 3, $flip),
+          pixel($pixel, 1, 4, $flip),
+          pixel($pixel, 1, 5, $flip),
+          pixel($pixel, 1, 6, $flip),
+          pixel($pixel, 1, 7, $flip),
+          pixel($pixel, 1, 8, $flip),
+          pixel($pixel, 1, 9, $flip),
+          pixel($pixel, 1, 10, $flip),
+          pixel($pixel, 1, 11, $flip),
+          //línea izquierda
+          pixel($pixel, 14, 1, $flip),
+          pixel($pixel, 14, 2, $flip),
+          pixel($pixel, 14, 3, $flip),
+          pixel($pixel, 14, 4, $flip),
+          pixel($pixel, 14, 5, $flip),
+          pixel($pixel, 14, 6, $flip),
+          pixel($pixel, 14, 7, $flip),
+          pixel($pixel, 14, 8, $flip),
+          pixel($pixel, 14, 9, $flip),
+          pixel($pixel, 14, 10, $flip),
+          pixel($pixel, 14, 11, $flip),
+          //línea arriba
+          pixel($pixel, 2, 1, $flip),
+          pixel($pixel, 3, 1, $flip),
+          pixel($pixel, 4, 1, $flip),
+          pixel($pixel, 5, 1, $flip),
+          pixel($pixel, 6, 1, $flip),
+          pixel($pixel, 7, 1, $flip),
+          pixel($pixel, 8, 1, $flip),
+          pixel($pixel, 9, 1, $flip),
+          pixel($pixel, 10, 1, $flip),
+          pixel($pixel, 11, 1, $flip),
+          pixel($pixel, 12, 1, $flip),
+          pixel($pixel, 13, 1, $flip),
+          //piernas
           pixel($pixel, 6, 12, $flip),
-          pixel($pixel, 7, 12, $flip),
           pixel($pixel, 8, 12, $flip),
-          pixel($pixel, 3, 13, $flip),
-          pixel($pixel, 4, 13, $flip),
-          pixel($pixel, 5, 13, $flip),
           pixel($pixel, 6, 13, $flip),
-          pixel($pixel, 7, 13, $flip),
           pixel($pixel, 8, 13, $flip);
 }
 
@@ -221,6 +125,12 @@ $pixel: $grid-size / $pixdiv;
   height: $size;
   position: absolute;
   transition: top 0.1s ease-in, left 0.15s;
+  background: {
+    image: url("/../../resources/authors_images/authors_images/gabriela_mistral.png") ;
+    size: 100%;
+    repeat: no-repeat;
+  }
+  background-position: 100%;
   &:before {
     @include pixel-0($pixel, $flip);
     content: '';
@@ -229,7 +139,7 @@ $pixel: $grid-size / $pixdiv;
     position: absolute;
 
     &.move {
-      animation: character-move 0.5s infinite;
+      animation: character-move 0.8s infinite;
     }
   }
 }
@@ -312,11 +222,11 @@ $classes: (
 // CSS LOOP END
 
 .container-game {
-
   /*overflow: hidden;*/
   position: relative;
   flex-shrink: 0;
   flex-grow: 0;
+  background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.paredro.com%2Flos-20-mejores-libros-sobre-diseno-grafico-del-2014-parte-i%2F&psig=AOvVaw1T-5yLJ-moqo1aFbbVen5d&ust=1592761169999000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDF9vD3kOoCFQAAAAAdAAAAABAD);
 
   .screen {
     width: $grid-size * $columns;
@@ -360,9 +270,12 @@ $classes: (
         transform: rotate(-90deg);
       }
     }
-
+    .imagen{
+      background-image: $background-image;
+    }
     &.active {
-      background-image: linear-gradient(to bottom, $background-color-1, $background-color-2);
+      background-image: $background-image;
+      background-size: 20%;
     }
   }
 }
