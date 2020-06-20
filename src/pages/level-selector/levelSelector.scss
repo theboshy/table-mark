@@ -16,7 +16,7 @@ td[data-selected='true'] {
   opacity: .5;
 }
 
-.layoutContainer{
+.layoutContainer {
   display: inline-flex;
   flex-wrap: wrap;
   margin: 0;
@@ -24,7 +24,7 @@ td[data-selected='true'] {
   align-items: center;
 }
 
-.level-section{
+.level-section {
   width: 200px;
   height: 200px;
   border: 2px solid red;
@@ -32,43 +32,48 @@ td[data-selected='true'] {
   margin: 2em;
 }
 
-.container{
+.container-game {
   width: 150vmin;
   height: 150vmin;
   position: relative;
+  margin: 2em 0 0 2em;
 }
-.scene{
+
+.scene {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/127738/city_camera.svg);
-  background-size:100% 100%;
+  background-size: 100% 100%;
 }
-svg{
+
+svg {
   width: 100px;
   opacity: 0.8;
   position: fixed;
   top: 0;
   left: 0;
-  background:white;
-}
-path{
-  fill:none;
-  stroke:black;
-}
-circle{
-  fill:red;
+  background: white;
 }
 
-.center{
+path {
+  fill: none;
+  stroke: black;
+}
+
+circle {
+  fill: red;
+}
+
+.center {
   position: fixed;
   width: 10px;
   height: 10px;
   top: calc(50% - 5px);
   left: calc(50% - 5px);
-  background:red;
+  background: red;
   border-radius: 50%;
 }
 
@@ -94,124 +99,121 @@ $block-1: #696969;
 $block-2: #c0c0c0;
 $block-3: #808080;
 $LVL: RED;
+$rows: 10;
+$columns: 15;
 
 // VARIABLES
 $grid-size: 80px;
 $move-time: 0.1s;
 
 // CHARACTER PIXEL ART START
-$pixdiv : 16;
+$pixdiv: 16;
 $pixel: $grid-size / $pixdiv;
 
 @function pixel($pixel, $x, $y, $flip) {
   @if ($flip) {
     @return ($pixel * ($pixdiv - 1 - $x)) ($pixel * $y) $black
-  }
-  @else {
+  } @else {
     @return ($pixel * $x) ($pixel * $y) $black
   }
 }
 
 @function pixel-common($pixel, $flip) {
-  @return
-    // pixel($pixel,  15,  0),
-          pixel($pixel,  4,  4, $flip),
-          pixel($pixel,  5,  4, $flip),
-          pixel($pixel,  6,  4, $flip),
-          pixel($pixel,  7,  4, $flip),
-          pixel($pixel,  8,  4, $flip),
-          pixel($pixel,  9,  4, $flip),
-          pixel($pixel, 10,  4, $flip),
-          pixel($pixel, 11,  4, $flip),
-          pixel($pixel,  3,  5, $flip),
-          pixel($pixel,  4,  5, $flip),
-          pixel($pixel,  5,  5, $flip),
-          pixel($pixel,  6,  5, $flip),
-          pixel($pixel,  7,  5, $flip),
-          pixel($pixel,  8,  5, $flip),
-          pixel($pixel,  9,  5, $flip),
-          pixel($pixel, 10,  5, $flip),
-          pixel($pixel, 11,  5, $flip),
-          pixel($pixel, 12,  5, $flip),
-          pixel($pixel,  3,  6, $flip),
-          pixel($pixel,  4,  6, $flip),
-          pixel($pixel,  6,  6, $flip),
-          pixel($pixel,  7,  6, $flip),
-          pixel($pixel,  8,  6, $flip),
-          pixel($pixel,  9,  6, $flip),
-          pixel($pixel, 10,  6, $flip),
-          pixel($pixel, 11,  6, $flip),
-          pixel($pixel, 12,  6, $flip),
-          pixel($pixel,  3,  7, $flip),
-          pixel($pixel,  4,  7, $flip),
-          pixel($pixel,  5,  7, $flip),
-          pixel($pixel,  6,  7, $flip),
-          pixel($pixel,  7,  7, $flip),
-          pixel($pixel,  8,  7, $flip),
-          pixel($pixel,  9,  7, $flip),
-          pixel($pixel, 10,  7, $flip),
-          pixel($pixel, 11,  7, $flip),
-          pixel($pixel, 12,  7, $flip),
-          pixel($pixel,  3,  8, $flip),
-          pixel($pixel,  4,  8, $flip),
-          pixel($pixel,  5,  8, $flip),
-          pixel($pixel,  6,  8, $flip),
-          pixel($pixel,  7,  8, $flip),
-          pixel($pixel,  8,  8, $flip),
-          pixel($pixel,  9,  8, $flip),
-          pixel($pixel, 10,  8, $flip),
-          pixel($pixel, 11,  8, $flip),
-          pixel($pixel, 12,  8, $flip),
-          pixel($pixel,  4,  9, $flip),
-          pixel($pixel,  5,  9, $flip),
-          pixel($pixel,  6,  9, $flip),
-          pixel($pixel,  5, 10, $flip),
-          pixel($pixel,  6, 10, $flip),
-          pixel($pixel,  7, 10, $flip),
-          pixel($pixel,  8, 10, $flip),
-          pixel($pixel,  9, 10, $flip),
-          pixel($pixel,  7, 11, $flip),
-          pixel($pixel,  8, 11, $flip),
-          pixel($pixel,  6, 12, $flip),
-          pixel($pixel,  7, 12, $flip),
-          pixel($pixel,  8, 12, $flip),
-          pixel($pixel,  3, 13, $flip),
-          pixel($pixel,  4, 13, $flip),
-          pixel($pixel,  5, 13, $flip),
-          pixel($pixel,  6, 13, $flip),
-          pixel($pixel,  7, 13, $flip),
-          pixel($pixel,  8, 13, $flip);
+  @return // pixel($pixel,  15,  0),
+          pixel($pixel, 4, 4, $flip),
+          pixel($pixel, 5, 4, $flip),
+          pixel($pixel, 6, 4, $flip),
+          pixel($pixel, 7, 4, $flip),
+          pixel($pixel, 8, 4, $flip),
+          pixel($pixel, 9, 4, $flip),
+          pixel($pixel, 10, 4, $flip),
+          pixel($pixel, 11, 4, $flip),
+          pixel($pixel, 3, 5, $flip),
+          pixel($pixel, 4, 5, $flip),
+          pixel($pixel, 5, 5, $flip),
+          pixel($pixel, 6, 5, $flip),
+          pixel($pixel, 7, 5, $flip),
+          pixel($pixel, 8, 5, $flip),
+          pixel($pixel, 9, 5, $flip),
+          pixel($pixel, 10, 5, $flip),
+          pixel($pixel, 11, 5, $flip),
+          pixel($pixel, 12, 5, $flip),
+          pixel($pixel, 3, 6, $flip),
+          pixel($pixel, 4, 6, $flip),
+          pixel($pixel, 6, 6, $flip),
+          pixel($pixel, 7, 6, $flip),
+          pixel($pixel, 8, 6, $flip),
+          pixel($pixel, 9, 6, $flip),
+          pixel($pixel, 10, 6, $flip),
+          pixel($pixel, 11, 6, $flip),
+          pixel($pixel, 12, 6, $flip),
+          pixel($pixel, 3, 7, $flip),
+          pixel($pixel, 4, 7, $flip),
+          pixel($pixel, 5, 7, $flip),
+          pixel($pixel, 6, 7, $flip),
+          pixel($pixel, 7, 7, $flip),
+          pixel($pixel, 8, 7, $flip),
+          pixel($pixel, 9, 7, $flip),
+          pixel($pixel, 10, 7, $flip),
+          pixel($pixel, 11, 7, $flip),
+          pixel($pixel, 12, 7, $flip),
+          pixel($pixel, 3, 8, $flip),
+          pixel($pixel, 4, 8, $flip),
+          pixel($pixel, 5, 8, $flip),
+          pixel($pixel, 6, 8, $flip),
+          pixel($pixel, 7, 8, $flip),
+          pixel($pixel, 8, 8, $flip),
+          pixel($pixel, 9, 8, $flip),
+          pixel($pixel, 10, 8, $flip),
+          pixel($pixel, 11, 8, $flip),
+          pixel($pixel, 12, 8, $flip),
+          pixel($pixel, 4, 9, $flip),
+          pixel($pixel, 5, 9, $flip),
+          pixel($pixel, 6, 9, $flip),
+          pixel($pixel, 5, 10, $flip),
+          pixel($pixel, 6, 10, $flip),
+          pixel($pixel, 7, 10, $flip),
+          pixel($pixel, 8, 10, $flip),
+          pixel($pixel, 9, 10, $flip),
+          pixel($pixel, 7, 11, $flip),
+          pixel($pixel, 8, 11, $flip),
+          pixel($pixel, 6, 12, $flip),
+          pixel($pixel, 7, 12, $flip),
+          pixel($pixel, 8, 12, $flip),
+          pixel($pixel, 3, 13, $flip),
+          pixel($pixel, 4, 13, $flip),
+          pixel($pixel, 5, 13, $flip),
+          pixel($pixel, 6, 13, $flip),
+          pixel($pixel, 7, 13, $flip),
+          pixel($pixel, 8, 13, $flip);
 }
 
 @mixin pixel-0($pixel, $flip) {
-  box-shadow:
-          pixel-common($pixel, $flip),
-          pixel($pixel, 6, 14, $flip),
-          pixel($pixel, 8, 14, $flip),
-          pixel($pixel, 6, 15, $flip),
-          pixel($pixel, 7, 15, $flip),
-          pixel($pixel, 8, 15, $flip),
-          pixel($pixel, 9, 15, $flip);
+  box-shadow: pixel-common($pixel, $flip),
+  pixel($pixel, 6, 14, $flip),
+  pixel($pixel, 8, 14, $flip),
+  pixel($pixel, 6, 15, $flip),
+  pixel($pixel, 7, 15, $flip),
+  pixel($pixel, 8, 15, $flip),
+  pixel($pixel, 9, 15, $flip);
 }
 
 @mixin pixel-1($pixel, $flip) {
-  box-shadow:
-          pixel-common($pixel, $flip),
-          pixel($pixel, 6, 14, $flip),
-          pixel($pixel, 8, 14, $flip),
-          pixel($pixel, 9, 14, $flip),
-          pixel($pixel, 6, 15, $flip),
-          pixel($pixel, 7, 15, $flip);
+  box-shadow: pixel-common($pixel, $flip),
+  pixel($pixel, 6, 14, $flip),
+  pixel($pixel, 8, 14, $flip),
+  pixel($pixel, 9, 14, $flip),
+  pixel($pixel, 6, 15, $flip),
+  pixel($pixel, 7, 15, $flip);
 }
 
 @mixin pixel-2($pixel, $flip) {
-  box-shadow:
-          pixel-common($pixel, $flip),
-          pixel($pixel, 6, 14, $flip),
-          pixel($pixel, 7, 14, $flip),
-          pixel($pixel, 8, 14, $flip),
-          pixel($pixel, 8, 15, $flip),
-          pixel($pixel, 9, 15, $flip);
+  box-shadow: pixel-common($pixel, $flip),
+  pixel($pixel, 6, 14, $flip),
+  pixel($pixel, 7, 14, $flip),
+  pixel($pixel, 8, 14, $flip),
+  pixel($pixel, 8, 15, $flip),
+  pixel($pixel, 9, 15, $flip);
 }
 
 @mixin character($size, $pixel, $flip) {
@@ -225,11 +227,13 @@ $pixel: $grid-size / $pixdiv;
     width: $pixel;
     height: $pixel;
     position: absolute;
+
     &.move {
       animation: character-move 0.5s infinite;
     }
   }
 }
+
 // CHARACTER PIXEL ART END
 
 // CSS LOOP START
@@ -238,7 +242,7 @@ $classes: (
                 'bg': (
                         linear-gradient(
                                         to top right,
-                                        $ground-1 0%  25%,
+                                        $ground-1 0% 25%,
                                         $ground-2 25% 50%,
                                         $ground-1 50% 75%,
                                         $ground-2 75% 100%
@@ -251,7 +255,7 @@ $classes: (
                         linear-gradient(to bottom, $lawn 0% 25%, transparent 25% 100%),
                         linear-gradient(
                                         to top right,
-                                        $ground-1 0%  25%,
+                                        $ground-1 0% 25%,
                                         $ground-2 25% 50%,
                                         $ground-1 50% 75%,
                                         $ground-2 75% 100%
@@ -261,10 +265,10 @@ $classes: (
         ),
         'block': (
                 'bg': (
-                        linear-gradient(to bottom, $block-1 0% 2% , transparent 2%  98%, $block-1 98% 100%),
-                        linear-gradient(to right , $block-1 0% 2% , transparent 2%  98%, $block-1 98% 100%),
+                        linear-gradient(to bottom, $block-1 0% 2%, transparent 2% 98%, $block-1 98% 100%),
+                        linear-gradient(to right, $block-1 0% 2%, transparent 2% 98%, $block-1 98% 100%),
                         linear-gradient(to bottom, $block-2 0 10%, transparent 10% 100%),
-                        linear-gradient(to right , $block-2 0 10%, transparent 10% 100%),
+                        linear-gradient(to right, $block-2 0 10%, transparent 10% 100%),
                         linear-gradient($block-3 0 100%)
                 ),
                 'bg-type': image
@@ -278,15 +282,15 @@ $classes: (
                 'bg-type': color
         ),
         'lvl': (
-        'bg': (
-                linear-gradient(to bottom, $block-1 0% 2% , transparent 2%  98%, $block-1 98% 100%),
-                linear-gradient(to right , $block-1 0% 2% , transparent 2%  98%, $block-1 98% 100%),
-                linear-gradient(to bottom, $block-2 0 10%, transparent 10% 100%),
-                linear-gradient(to right , $block-2 0 10%, transparent 10% 100%),
-                linear-gradient($LVL 0 100%)
-        ),
-        'bg-type': image
-      )
+                'bg': (
+                        linear-gradient(to bottom, $block-1 0% 2%, transparent 2% 98%, $block-1 98% 100%),
+                        linear-gradient(to right, $block-1 0% 2%, transparent 2% 98%, $block-1 98% 100%),
+                        linear-gradient(to bottom, $block-2 0 10%, transparent 10% 100%),
+                        linear-gradient(to right, $block-2 0 10%, transparent 10% 100%),
+                        linear-gradient($LVL 0 100%)
+                ),
+                'bg-type': image
+        )
 );
 
 @mixin common($bg, $bg-type, $grid-size) {
@@ -304,50 +308,59 @@ $classes: (
     @include common($bg, $bg-type, $grid-size);
   }
 }
+
 // CSS LOOP END
 
-
-
-.container {
+.container-game {
 
   /*overflow: hidden;*/
   position: relative;
   flex-shrink: 0;
   flex-grow: 0;
+
   .screen {
-    width: 100%;
-    height: 80%;
+    width: $grid-size * $columns;
+    height: $grid-size * $rows;
     display: grid;
-    grid-template-rows: repeat(25, $grid-size);
-    position: absolute;
+    grid-template-rows: repeat($rows, $grid-size);
+    position: relative;
     top: 0;
     transition: top 0.3s;
+
     .row {
       display: grid;
-      grid-template-columns: repeat(10, $grid-size);
+      grid-template-columns: repeat($columns, $grid-size);
+
       .col {
         width: $grid-size;
         height: $grid-size;
       }
     }
+
     .character {
       @include character($grid-size, $grid-size / $pixdiv, false);
+
       &.hide {
         visibility: hidden;
       }
+
       &.flip:not(.dead) {
         @include character($grid-size, $grid-size / $pixdiv, true);
       }
+
       &.move:not(.dead):before {
         animation: character-move 0.3s infinite;
       }
+
       &.move.flip:not(.dead):before {
         animation: character-move-flip 0.3s infinite;
       }
+
       &.dead {
         transform: rotate(-90deg);
       }
     }
+
     &.active {
       background-image: linear-gradient(to bottom, $background-color-1, $background-color-2);
     }
@@ -359,20 +372,37 @@ $classes: (
 
   @if ($flip) {
     $character-move: character-move-flip;
-  }
-  @else {
+  } @else {
     $character-move: character-move;
   }
   @keyframes #{$character-move} {
-    0%        { @include pixel-1($grid-size / $pixdiv, $flip); }
-    24.99999% { @include pixel-1($grid-size / $pixdiv, $flip); }
-    25%       { @include pixel-0($grid-size / $pixdiv, $flip); }
-    49.99999% { @include pixel-0($grid-size / $pixdiv, $flip); }
-    50%       { @include pixel-2($grid-size / $pixdiv, $flip); }
-    74.99999% { @include pixel-2($grid-size / $pixdiv, $flip); }
-    75%       { @include pixel-0($grid-size / $pixdiv, $flip); }
-    99.99999% { @include pixel-0($grid-size / $pixdiv, $flip); }
-    100%      { @include pixel-1($grid-size / $pixdiv, $flip); }
+    0% {
+      @include pixel-1($grid-size / $pixdiv, $flip);
+    }
+    24.99999% {
+      @include pixel-1($grid-size / $pixdiv, $flip);
+    }
+    25% {
+      @include pixel-0($grid-size / $pixdiv, $flip);
+    }
+    49.99999% {
+      @include pixel-0($grid-size / $pixdiv, $flip);
+    }
+    50% {
+      @include pixel-2($grid-size / $pixdiv, $flip);
+    }
+    74.99999% {
+      @include pixel-2($grid-size / $pixdiv, $flip);
+    }
+    75% {
+      @include pixel-0($grid-size / $pixdiv, $flip);
+    }
+    99.99999% {
+      @include pixel-0($grid-size / $pixdiv, $flip);
+    }
+    100% {
+      @include pixel-1($grid-size / $pixdiv, $flip);
+    }
   }
 }
 

@@ -36,13 +36,15 @@ export const LevelSelectorPage = (props: any) => {
             let q = a * p;
             let u = w - q;
             let m = new Array<Array<any>>();
-            for (let h = 0; h < 10; h++) {
+            const rows = 10;
+            const columns = 15;
+            for (let h = 0; h < rows; h++) {
                 m[h] = [];
-                for (let y = 0; y < 10; y++) {
-                    if (y == 0 || y == 9) {
+                for (let y = 0; y < columns; y++) {
+                    if (y == 0 || y == columns - 1) {
                         m[h][y] = '*'
                     }
-                    if (h == 0 || h == 9) {
+                    if (h == 0 || h == rows - 1) {
                         m[h][y] = '*';
                     }
                 }
@@ -59,7 +61,7 @@ export const LevelSelectorPage = (props: any) => {
         let quarters: JSX.Element[] = [];
         for (let i = 0; i < 10; i++) {
             quarters = [];
-            for (let e = 0; e < 10; e++) {
+            for (let e = 0; e < 15; e++) {
                 quarters.push(<div key={'s' + e + i} className="col" data-game-col={e}></div>);
             }
             list.push(<div key={'s' + i} className="row" data-game-row={i}>{quarters}</div>)
@@ -72,7 +74,7 @@ export const LevelSelectorPage = (props: any) => {
         </div>*/
     return <>
         <button onClick={initializeGame}>PRESIONA</button>
-        <div className="container">
+        <div className="container-game">
             <div className="screen" id="viewbox">
                 {list()}
                 <div className="character hide" id="character"></div>
