@@ -1,20 +1,21 @@
-import React, {useRef} from 'react';
+import React, {Component, useRef} from 'react';
 import './levelSelector.scss'
 import {CardAuthor} from "../../components/cardAuthor/card.author";
 import author from "../../mocks/authors.json";
-import { TimelineMax, TweenMax } from "gsap";
-export const LevelSelectorPage = (props: any)=>{
+import {TimelineMax, TweenMax} from "gsap";
+
+export const LevelSelectorPage = (props: any) => {
+
     const refLine = React.createRef();
     const cards = () => {
-        let cards: JSX.Element[] =  [];
-        for (let i = 0;i< 10; i++) {
+        let cards: JSX.Element[] = [];
+        for (let i = 0; i < 10; i++) {
             cards.push(<div className='level-section'></div>)
         }
         return cards;
     }
-    
 
-    
+
     const initializeGame = () => {
         let b = document.body;
 
@@ -27,35 +28,40 @@ export const LevelSelectorPage = (props: any)=>{
             w = c.offsetWidth;
             h = c.offsetHeight;
 
-        let a = 4;
-        let s = 10;
-        let b = 50;
-        let r = 50;
-        let p = Math.floor(c.offsetWidth / b);
-        let q = a * p;
-        let u = w - q;
-        let m = new Array<Array<any>>();
-        for (let h = 0 ; h < 10; h++) {
-            m[h] = [];
-            for (let y = 0; y < 10; y++) {
-                m[h][y] = '*';
+            let a = 4;
+            let s = 10;
+            let b = 50;
+            let r = 50;
+            let p = Math.floor(c.offsetWidth / b);
+            let q = a * p;
+            let u = w - q;
+            let m = new Array<Array<any>>();
+            for (let h = 0; h < 10; h++) {
+                m[h] = [];
+                for (let y = 0; y < 10; y++) {
+                    if (y == 0 || y == 9) {
+                        m[h][y] = '*'
+                    }
+                    if (h == 0 || h == 9) {
+                        m[h][y] = '*';
+                    }
+                }
             }
-        }
+            m[1][1] = 'S';
+            let z = new Game(c, v, m, a, s, b, r, u, w, h, f);
 
-        let z = new Game(c, v, m, a, s, b, r, u, w, h, f);
-
-        z.initialize();
+            z.initialize();
         }
     }
 
     const list = () => {
-        let list: JSX.Element[] =  [];
-        let quarters: JSX.Element[] =  [];
-        for (let i = 0;i< 10; i++) {
-            for (let e = 0;e < 10; e++) {
+        let list: JSX.Element[] = [];
+        let quarters: JSX.Element[] = [];
+        for (let i = 0; i < 10; i++) {
+            quarters = [];
+            for (let e = 0; e < 10; e++) {
                 quarters.push(<div key={'s' + e + i} className="col" data-game-col={e}></div>);
             }
-            quarters = [];
             list.push(<div key={'s' + i} className="row" data-game-row={i}>{quarters}</div>)
         }
         return list;
@@ -65,7 +71,7 @@ export const LevelSelectorPage = (props: any)=>{
             {cards()}
         </div>*/
     return <>
-        <button onClick={() => initializeGame()}>Presioname no mms</button>
+        <button onClick={initializeGame}>PRESIONA</button>
         <div className="container">
             <div className="screen" id="viewbox">
                 {list()}
@@ -99,30 +105,31 @@ class Game {
     private animation: null;
     private won: boolean;
     private dead: boolean;
+
     constructor(character: HTMLElement, viewbox: Element | any, map: string[][], allowance: number, space: number, columns: number, rows: number, charWidth: number, width: number, height: number, fps: number) {
-        this.character  = character;
-        this.viewbox    = viewbox;
-        this.map        = map;
-        this.allowance  = allowance;
-        this.space      = space;
-        this.columns    = columns;
-        this.rows       = rows;
-        this.charWidth  = charWidth;
-        this.width      = width;
-        this.height     = height;
-        this.fps        = fps;
-        this.left       = 0;
-        this.top        = 0;
+        this.character = character;
+        this.viewbox = viewbox;
+        this.map = map;
+        this.allowance = allowance;
+        this.space = space;
+        this.columns = columns;
+        this.rows = rows;
+        this.charWidth = charWidth;
+        this.width = width;
+        this.height = height;
+        this.fps = fps;
+        this.left = 0;
+        this.top = 0;
         this.activeKeyX = null;
         this.activeKeyY = null;
-        this.onLand     = true;
-        this.position   = {x: 0, y: 0};
-        this.jumpSpeed  = 0;
-        this.hasEvent   = false;
-        this.scroll     = 0;
-        this.animation  = null;
-        this.won        = false;
-        this.dead       = false;
+        this.onLand = true;
+        this.position = {x: 0, y: 0};
+        this.jumpSpeed = 0;
+        this.hasEvent = false;
+        this.scroll = 0;
+        this.animation = null;
+        this.won = false;
+        this.dead = false;
     }
 
     gameWin() {
@@ -148,14 +155,13 @@ class Game {
 
 
     changeLvl() {
-        this.position.x+=38;
+        this.position.x += 38;
     }
 
     collidable(o: string) {
         if (o === '*' || o === '#' || o === 'H') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -176,16 +182,13 @@ class Game {
         if (d === 'u') {
             i = Math.floor((y + h - (s * 2) + 2 + c) / h);
             k = Math.floor((y + h - (s * 2) + 2 + c) / h);
-        }
-        else if (d === 'd') {
+        } else if (d === 'd') {
             i = Math.floor((y + h + c) / h);
             k = Math.floor((y + h + c) / h);
-        }
-        else if (d === 'l') {
+        } else if (d === 'l') {
             j = Math.floor((x + c + (a * 2)) / w);
             l = Math.floor((x + c + (a * 2)) / w);
-        }
-        else if (d === 'r') {
+        } else if (d === 'r') {
             j = Math.floor((x + w + c - (a * 2)) / w);
             l = Math.floor((x + w + c - (a * 2)) / w);
         }
@@ -193,8 +196,7 @@ class Game {
         if (d === 'l' || d === 'r') {
             i = Math.floor((y + h - (s * 2) + 2) / h);
             k = Math.floor((y + h - 1) / h);
-        }
-        else if (d === 'u' || d === 'd') {
+        } else if (d === 'u' || d === 'd') {
             j = Math.floor((x + (a * 2)) / w);
             l = Math.floor((x + w - (a * 2) - 1) / w);
         }
@@ -209,18 +211,14 @@ class Game {
                     x: (j * w),
                     y: (i * h)
                 };
-            }
-            else if (o === 'X') {
+            } else if (o === 'X') {
                 this.die();
-            }
-            else if (o === 'O') {
+            } else if (o === 'O') {
                 this.gameWin();
-            }
-            else {
+            } else {
                 return null;
             }
-        }
-        catch (e) {
+        } catch (e) {
             return null;
         }
         return 0;
@@ -233,14 +231,12 @@ class Game {
 
         if (o === null) {
             this.position.x += Math.floor(d);
-        }
-        else {
+        } else {
             if (e === 'l') {
                 if (typeof o !== "number") {
                     this.position.x = Math.floor(o.x) + w - (a * 2);
                 }
-            }
-            else if (e === 'r') {
+            } else if (e === 'r') {
                 if (typeof o !== "number") {
                     this.position.x = Math.floor(o.x) - w + (a * 2);
                 }
@@ -259,13 +255,12 @@ class Game {
             this.onLand = false;
 
             this.position.y += g;
-        }
-        else {
+        } else {
             if (typeof p !== "number") {
                 this.position.y = p.y - h;
             }
-            this.jumpSpeed  = 0;
-            this.onLand     = true;
+            this.jumpSpeed = 0;
+            this.onLand = true;
         }
 
         if (this.activeKeyY !== null && g < 0) {
@@ -273,9 +268,8 @@ class Game {
 
             if (o === null) {
                 this.jumpSpeed += (f / 2);
-            }
-            else {
-                this.jumpSpeed  = 0;
+            } else {
+                this.jumpSpeed = 0;
                 if (typeof o !== "number") {
                     this.position.y = o.y + h - (s * 2) + 2;
                 }
@@ -286,7 +280,7 @@ class Game {
     renderCharacter() {
         let c = this.character;
 
-        c.style.top  = this.position.y + 'px';
+        c.style.top = this.position.y + 'px';
         c.style.left = this.position.x + 'px';
     }
 
@@ -300,12 +294,10 @@ class Game {
 
             if (a === 37) {
                 c.classList.add('flip');
-            }
-            else if (a === 39) {
+            } else if (a === 39) {
                 c.classList.remove('flip');
             }
-        }
-        else if (mode === 'hide') {
+        } else if (mode === 'hide') {
             c.classList.remove('move');
         }
     }
@@ -317,13 +309,12 @@ class Game {
             let b = document.body;
 
             b.addEventListener('keydown', (e) => {
-                 if (e.keyCode === 40) {
+                if (e.keyCode === 40) {
                     this.position.y += 38;
-                    this.jumpSpeed  = Math.floor(this.height * -0.7);
-                }
-                else if ((e.keyCode === 37 || e.keyCode === 39) && this.activeKeyX === null) {
+                    this.jumpSpeed = Math.floor(this.height * -0.7);
+                } else if ((e.keyCode === 37 || e.keyCode === 39) && this.activeKeyX === null) {
                     this.activeKeyX = e.keyCode;
-                    this.jumpSpeed  = Math.floor(this.height * -0.7);
+                    this.jumpSpeed = Math.floor(this.height * -0.7);
                     this.animateCharacter('show');
                 }
             });
@@ -332,10 +323,9 @@ class Game {
                 this.animateCharacter('hide');
                 if (e.keyCode === 37 || e.keyCode === 39) {
                     this.activeKeyX = null;
-                }
-                else if (e.keyCode === 38) {
+                } else if (e.keyCode === 38) {
                     this.activeKeyY = null;
-                    this.jumpSpeed  = 0;
+                    this.jumpSpeed = 0;
                 }
             });
         }
@@ -360,23 +350,17 @@ class Game {
 
                 if (m[i][j] === '#') {
                     c.classList.add('lawn');
-                }
-                else if (m[i][j] === 'H') {
+                } else if (m[i][j] === 'H') {
                     c.classList.add('ground');
-                }
-                else if (m[i][j] === 'O') {
+                } else if (m[i][j] === 'O') {
                     c.classList.add('finish');
-                }
-                else if (m[i][j] === '*' || m[i][j] === 'L') {
+                } else if (m[i][j] === '*' || m[i][j] === 'L') {
                     c.classList.add('block');
-                }
-                else if (m[i][j] === ' ') {
+                } else if (m[i][j] === ' ') {
                     c.classList.add('space');
-                }
-                else if(m[i][j] === 'X') {
+                } else if (m[i][j] === 'X') {
                     c.classList.add('lvl');
-                }
-                else if (m[i][j] === 'S') {
+                } else if (m[i][j] === 'S') {
                     this.position = {x: j * w, y: i * h};
                 }
             }
@@ -411,8 +395,7 @@ class Game {
             if (this.won === false && this.dead === false) {
                 if (a === 37) {
                     m.moveCharacter(Math.floor(u * -0.15), 'l');
-                }
-                else if (a === 39) {
+                } else if (a === 39) {
                     m.moveCharacter(Math.floor(u * 0.15), 'r');
                 }
             }
@@ -426,7 +409,7 @@ class Game {
     }
 
     initialize() {
-        this.won  = false;
+        this.won = false;
         this.dead = false;
 
         this.viewbox.classList.add('active');
