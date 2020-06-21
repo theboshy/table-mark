@@ -1,4 +1,4 @@
-import React, {Component, useRef} from 'react';
+import React, {Component, useEffect, useRef} from 'react';
 import './tableGame.scss'
 import {StorageService} from "../../services/save.local.storage";
 import {Keys} from "../../keys";
@@ -10,6 +10,10 @@ const storageService = new StorageService();
 const rows = 10;
 const columns = 23;
 export const TableGame = (props: any) => {
+
+    useEffect(() => {
+        initializeGame();
+    },[])
 
     const refLine = React.createRef();
     const cards = () => {
@@ -67,7 +71,6 @@ export const TableGame = (props: any) => {
             {cards()}
         </div>*/
     return <>
-        <button onClick={initializeGame}>PRESIONA</button>
         <div className="container-game">
             <div className="screen" id="viewbox">
                 {list()}
