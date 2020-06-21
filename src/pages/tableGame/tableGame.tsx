@@ -27,6 +27,9 @@ export const TableGame = (props: any) => {
     const storageService = new StorageService();
 
     const initializeGame = () => {
+
+        let file  =new FileDownloader();
+        file.downloadFile('COMPRENSIONLECTORA_1.zip')
         
         let b = document.body;
 
