@@ -28,9 +28,9 @@ export const LoginPage = (props: any) => {
             console.log("There is a user!");
             console.log(user);
             if (user.icon != "") {
-                history.push('/lvlSelector');
+                history.push(Keys.TABLE_GAME);
             } else {
-                history.push('/createUser')
+                history.push(Keys.CREATE_USER)
             }
         } else {
             let userJson = User;
@@ -39,7 +39,7 @@ export const LoginPage = (props: any) => {
             storageService.set(Keys.USER, user);
             let map = new InitialMap();
             map.saveInitialMap();
-            history.push('/createUser')
+            history.push(Keys.CREATE_USER);
         }
 
     }

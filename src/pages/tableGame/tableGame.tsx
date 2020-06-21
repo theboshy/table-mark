@@ -151,7 +151,7 @@ class Game {
             //}, 1000);
             //this.map;
             this.initialize();
-            this.history.push("/game");
+            this.history.push(Keys.INPUT_SCORE);
             if(!this.open) {
                 this.open = true;
                 window.open("http://www.facebook.com");

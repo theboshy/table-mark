@@ -22,10 +22,10 @@ export const CardAuthor = (props: any) => {
             if(action){
                 action(props.author.id);
             }
-            history.push('/lvlSelector');
+            history.push(Keys.TABLE_GAME);
         }else{
             console.log("No se ha creado un usuario")
-            history.push('/');
+            history.push(Keys.LOGIN);
         }
     }
     return <>
