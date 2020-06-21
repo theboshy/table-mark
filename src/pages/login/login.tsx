@@ -2,10 +2,10 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 import './loginStyle.scss';
 import {StorageService} from '../../services/save.local.storage';
 import {useHistory} from 'react-router-dom';
-import {writeMachine} from '../../services/save.local.machine';
 import {SendEmail} from "../../services/send.email";
 import {User} from '../../models/user';
 import {Keys} from '../../keys';
+import {InitialMap} from "../tableGame/map";
 
 export const LoginPage = (props: any) => {
     const [userName, setUserName] = useState('');
@@ -17,7 +17,6 @@ export const LoginPage = (props: any) => {
     let user = User;
     user = storageService.get(Keys.USER);
 
-    const wF = new writeMachine();
     /**
      * Button handler ("Entrar").
      * @param e event
@@ -29,7 +28,7 @@ export const LoginPage = (props: any) => {
             console.log("There is a user!");
             console.log(user);
             if (user.icon != "") {
-                history.push('/game');
+                history.push('/lvlSelector');
             } else {
                 history.push('/createUser')
             }
@@ -38,6 +37,8 @@ export const LoginPage = (props: any) => {
             userJson.name = userName;
             user = userJson;
             storageService.set(Keys.USER, user);
+            let map = new InitialMap();
+            map.saveInitialMap();
             history.push('/createUser')
         }
 

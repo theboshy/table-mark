@@ -15,14 +15,14 @@ export const CardAuthor = (props: any) => {
             user.icon = props.author;
         }
 
-        storageService.set('__user_name', user);
+        storageService.set(Keys.USER, user);
         if(action){
             action(props.author.id);
             storageService.set(Keys.USER, user);
             if(action){
                 action(props.author.id);
             }
-            history.push('/game');
+            history.push('/lvlSelector');
         }else{
             console.log("No se ha creado un usuario")
             history.push('/');

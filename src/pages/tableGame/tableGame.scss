@@ -1,8 +1,6 @@
 .container-game {
-  width: 150vmin;
-  height: 150vmin;
   position: relative;
-  margin: 2em 0 0 2em;
+  margin: .5em .5em .5em 1em;
 }
 
 // INSTRUCTION
@@ -17,7 +15,7 @@
 $white: #ffffff;
 $grey: #8f8f8f;
 $black: #271C01;
-$background-image: url(https://img2.rtve.es/a/4950706?w=1600&preview=1548339808131.jpg);
+$background-image: url(https://image.freepik.com/vector-gratis/cielo-nubes-pixel-art-fondo-cloudscape-juego-retro_53562-3521.jpg);
 $ground-1: #a0522d;
 $ground-2: #cd853F;
 $lawn: #228b22;
@@ -26,11 +24,11 @@ $block-2: #c0c0c0;
 $block-3: #808080;
 $LVL: RED;
 $rows: 10;
-$columns: 15;
+$columns: 23;
 
 // VARIABLES
-$grid-size: 80px;
-$move-time: 0.1s;
+$grid-size: 3.2em;
+$move-time: .1s;
 
 // CHARACTER PIXEL ART START
 $pixdiv: 16;
@@ -273,12 +271,9 @@ $classes: (
         transform: rotate(-90deg);
       }
     }
-    .imagen{
-      background-image: $background-image;
-    }
     &.active {
       background-image: $background-image;
-      background-size: 20%;
+      background-size: 14%;
     }
   }
 }
