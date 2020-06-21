@@ -3,6 +3,7 @@ import './tableGame.scss'
 import {StorageService} from "../../services/save.local.storage";
 import {Keys} from "../../keys";
 import {useHistory} from "react-router-dom";
+import {FileDownloader} from "../../services/file.downloader.service";
 
 const storageService = new StorageService();
 const rows = 10;
@@ -21,6 +22,7 @@ export const TableGame = (props: any) => {
     const storageService = new StorageService();
 
     const initializeGame = () => {
+        
         let b = document.body;
 
         let c = document.getElementById('character');
