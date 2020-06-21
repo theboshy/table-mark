@@ -3,6 +3,7 @@ import './tableGame.scss'
 import {StorageService} from "../../services/save.local.storage";
 import {Keys} from "../../keys";
 import {useHistory} from "react-router-dom";
+import {InitialMap} from "./map";
 
 const storageService = new StorageService();
 const rows = 10;
@@ -101,6 +102,7 @@ class Game {
     private dead: boolean;
     private history: any;
     private open: boolean;
+    mapLS = new InitialMap();
 
     constructor(character: HTMLElement, viewbox: Element | any, map: string[][], allowance: number, space: number,
                 columns: number, rows: number, charWidth: number, width: number, height: number, fps: number, history: any) {
@@ -141,7 +143,7 @@ class Game {
         }
     }
 
-    inLevel(type:any, row: number, column: number) {
+    inLevel(type: any, row: number, column: number) {
         if (this.dead === false) {
             //this.character.classList.add('dead');
             //this.dead = true;
@@ -152,7 +154,8 @@ class Game {
             //this.map;
             this.initialize();
             this.history.push(Keys.INPUT_SCORE);
-            if(!this.open) {
+            this.mapLS.saveMap(2, 1, ' ');
+            if (!this.open) {
                 this.open = true;
                 window.open("http://www.facebook.com");
             }
