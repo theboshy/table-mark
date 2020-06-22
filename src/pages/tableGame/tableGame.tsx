@@ -11,47 +11,55 @@ const rows = 10;
 const columns = 23;
 export const TableGame = (props: any) => {
 
-    useEffect(() => {
-        initializeGame();
-    },[])
-
-    const refLine = React.createRef();
-    const cards = () => {
-        let cards: JSX.Element[] = [];
-        for (let i = 0; i < 10; i++) {
-            cards.push(<div className='level-section'></div>)
-        }
-        return cards;
-    }
     const history = useHistory();
     const storageService = new StorageService();
+    const map = new InitialMap();
+    useEffect(() => {
+        let user;
+        if (user = storageService.get(Keys.USER)) {
+            if (user.icon !== "") {
+                initializeGame();
+            }else{
+                setTimeout(() => {
+                    alert('No has elegido un autor, por favor elige uno.');
+                }, 1000);
+                console.log("No se ha elegido autor");
+                history.push(Keys.CREATE_USER);
+            }
+        } else {
+            setTimeout(() => {
+                alert('No has creado un usuario, por favor crea un usuario para jugar.');
+            }, 1000);
+            console.log("No hay usuario")
+            history.push(Keys.LOGIN);
+        }
+    }, [])
 
     const initializeGame = () => {
+        map.saveInitialMap(); //comentar esta línea, pues se usa para cambios de mapa en pruebas.
+        let file = new FileDownloader();
+        //file.downloadFile('COMPRENSIONLECTORA_1.zip')
 
-        let file  =new FileDownloader();
-        file.downloadFile('COMPRENSIONLECTORA_1.zip')
-        
         let b = document.body;
 
-        let c = document.getElementById('character');
-        let v = document.querySelector('#viewbox');
-        let f = 24;
-        let w;
-        let h;
-        if (c instanceof HTMLElement) {
-            console.log("Tamaño del caracter es " + c.offsetWidth)
-            w = c.offsetWidth;
-            h = c.offsetHeight;
-
-            let a = 4;
-            let s = 10;
-            let b = 10;
-            let r = 10;
-            let p = Math.floor(c.offsetWidth / b);
-            let q = a * p;
-            let u = w - q;
-            let m = storageService.get(Keys.MAP);
-            let z = new Game(c, v, m, a, s, b, r, u, w, h, f, history);
+        let character = document.getElementById('character');
+        let viewBox = document.querySelector('#viewbox');
+        let width;
+        let height;
+        if (character instanceof HTMLElement) {
+            width = character.offsetWidth;
+            height = character.offsetHeight;
+            let fps = 30;
+            let allowance = 6;
+            let space = 10;
+            let columns = 10;
+            let rows = 10;
+            let p = Math.floor(character.offsetWidth / columns);
+            let q = allowance * p;
+            let charWidth = width - q;
+            let mapTable = storageService.get(Keys.MAP);
+            let z = new Game(character, viewBox, mapTable, allowance, space, columns, rows,
+                charWidth, width, height, fps, history);
 
             z.initialize();
         }
@@ -70,9 +78,7 @@ export const TableGame = (props: any) => {
         return list;
     }
 
-    /*<div className='layoutContainer'>
-            {cards()}
-        </div>*/
+
     return <>
         <div className="container-game">
             <div className="screen" id="viewbox">
@@ -292,7 +298,7 @@ class Game {
     renderCharacter() {
         let c = this.character;
         c.style.backgroundImage = "url(" + storageService.get(Keys.USER).icon.icon + ")";
-        console.log(storageService.get(Keys.USER).icon.icon);
+        //console.log(storageService.get(Keys.USER).icon.icon);
         c.style.top = this.position.y + 'px';
         c.style.left = this.position.x + 'px';
     }
@@ -324,7 +330,7 @@ class Game {
             b.addEventListener('keydown', (e) => {
                 if (e.keyCode === 38 && this.activeKeyY === null && this.onLand === true) {
                     this.activeKeyY = 38;
-                    this.jumpSpeed = Math.floor(this.height * -0.7);
+                    this.jumpSpeed = Math.floor(this.height * -0.6);
                 } else if ((e.keyCode === 37 || e.keyCode === 39) && this.activeKeyX === null) {
                     this.activeKeyX = e.keyCode;
                     this.animateCharacter('show');
@@ -375,6 +381,8 @@ class Game {
                     c.classList.add('lvl');
                 } else if (m[i][j] === 'S') {
                     this.position = {x: j * w, y: i * h};
+                } else if (!isNaN(Number(m[i][j]))) {
+                    console.log("ES NÚMERO " + m[i][j])
                 }
             }
         }

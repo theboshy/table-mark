@@ -27,7 +27,7 @@ export const LoginPage = (props: any) => {
         if ((user != null)) { //There is a user created
             console.log("There is a user!");
             console.log(user);
-            if (user.icon != "") {
+            if (user.icon !== "") {
                 history.push(Keys.TABLE_GAME);
             } else {
                 history.push(Keys.CREATE_USER)
