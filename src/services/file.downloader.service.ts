@@ -7,7 +7,7 @@ export class FileDownloader {
      * @param fileName
      */
     downloadFile = (fileName: string) => {
-        FileSaver.saveAs("http://localhost:3000/resources/games" + fileName, fileName);
+        FileSaver.saveAs("http://localhost:3000/resources/" + fileName, fileName);
     }
 
 }

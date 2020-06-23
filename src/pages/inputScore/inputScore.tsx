@@ -1,10 +1,12 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import {Keys} from "../../keys";
+
 
 export const InputScore = (props: any) =>{
-
+    const history = useHistory();
     const handleButton = () =>{
-        window.open("http://www.facebook.com");
+        history.push(Keys.PAGE_TABLE_GAME);
     }
 
     return <>

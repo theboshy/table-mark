@@ -1,10 +1,11 @@
-import React, {Component, useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import './tableGame.scss'
 import {StorageService} from "../../services/save.local.storage";
 import {Keys} from "../../keys";
 import {useHistory} from "react-router-dom";
 import {FileDownloader} from "../../services/file.downloader.service";
 import {InitialMap} from "./map";
+import level from '../../mocks/levels.json';
 
 const storageService = new StorageService();
 const rows = 10;
@@ -19,24 +20,24 @@ export const TableGame = (props: any) => {
         if (user = storageService.get(Keys.USER)) {
             if (user.icon !== "") {
                 initializeGame();
-            }else{
+            } else {
                 setTimeout(() => {
                     alert('No has elegido un autor, por favor elige uno.');
                 }, 1000);
                 console.log("No se ha elegido autor");
-                history.push(Keys.CREATE_USER);
+                history.push(Keys.PAGE_CREATE_USER);
             }
         } else {
             setTimeout(() => {
                 alert('No has creado un usuario, por favor crea un usuario para jugar.');
             }, 1000);
             console.log("No hay usuario")
-            history.push(Keys.LOGIN);
+            history.push(Keys.PAGE_LOGIN);
         }
     }, [])
 
     const initializeGame = () => {
-        map.saveInitialMap(); //comentar esta línea, pues se usa para cambios de mapa en pruebas.
+        //map.saveInitialMap(); //comentar esta línea, pues se usa para cambios de mapa en pruebas.
         let file = new FileDownloader();
         //file.downloadFile('COMPRENSIONLECTORA_1.zip')
 
@@ -157,7 +158,13 @@ class Game {
         }
     }
 
-    inLevel(type: any, row: number, column: number) {
+    /**
+     * What to do when the user is at the level.
+     * @param levelName
+     * @param row
+     * @param column
+     */
+    inLevel(levelName: any, row: number, column: number) {
         if (this.dead === false) {
             //this.character.classList.add('dead');
             //this.dead = true;
@@ -166,16 +173,60 @@ class Game {
             //    alert('Está entrando al nivel...');
             //}, 1000);
             //this.map;
-            this.initialize();
-            this.history.push(Keys.INPUT_SCORE);
-            this.mapLS.saveMap(2, 1, ' ');
+            let levelJson = this.selectorLevel(levelName);
             if (!this.open) {
-                this.open = true;
-                window.open("http://www.facebook.com");
+                if (levelJson) {
+                    switch (levelJson.type) {
+                        case Keys.TYPE_ZIP:
+                            let fileDownloader = new FileDownloader();
+                            //fileDownloader.downloadFile(levelJson.resource);
+                            console.log("Es un ZIp");
+                            break;
+                        case Keys.TYPE_EDUCAPLAY:
+                            window.open(levelJson.resource);
+                            console.log("Es una página externa")
+                            break;
+                        case Keys.TYPE_HTML:
+                            break;
+                        default:
+                            console.log("Este tipo de juego no existe");
+                            break;
+                    }
+                    this.changeSpawn(row, column);
+                    this.history.push(Keys.PAGE_INPUT_SCORE);
+                    this.open = true;
+                }
             }
         }
     }
 
+    /**
+     * change the spawn by the level coordinates
+     * @param r row
+     * @param c column
+     */
+    changeSpawn(r: number, c: number) {
+        let beforeSpawn: any = localStorage.getItem(Keys.SPAWN);
+        beforeSpawn = JSON.parse(beforeSpawn);
+        this.mapLS.saveMap(r, c, 'S');
+        this.mapLS.saveMap(beforeSpawn.i, beforeSpawn.j, ' ');
+        this.mapLS.saveNewSpawn(r, c);
+    }
+
+    /**
+     * find and return the level in the levels json.
+     * @param levelName
+     */
+    selectorLevel(levelName: string) {
+        let levels = level;
+        let lvlJson: any;
+        levels.forEach((lvl) => {
+            if (lvl.level === levelName) {
+                lvlJson = lvl;
+            }
+        })
+        return lvlJson;
+    }
 
     changeLvl() {
         this.position.x += 38;
@@ -223,13 +274,17 @@ class Game {
             j = Math.floor((x + (a * 2)) / w);
             l = Math.floor((x + w - (a * 2) - 1) / w);
         }
-        if (m[i][j] === 'X') {
+        let boxName = m[i][j];
+        if (boxName === 'X') {
             console.log("Hola");
-            this.inLevel("Tipo 1", i, j);
+            //this.inLevel("Tipo 1", i, j);
+        }
+        if (!isNaN(Number(boxName)) && boxName !== ' ') {
+            this.inLevel(boxName, i, j);
         }
 
         try {
-            let o = m[i][j];
+            let o = boxName;
             let p = m[k][l];
 
 
@@ -377,12 +432,10 @@ class Game {
                     c.classList.add('block');
                 } else if (m[i][j] === ' ') {
                     c.classList.add('space');
-                } else if (m[i][j] === 'X') {
-                    c.classList.add('lvl');
                 } else if (m[i][j] === 'S') {
                     this.position = {x: j * w, y: i * h};
-                } else if (!isNaN(Number(m[i][j]))) {
-                    console.log("ES NÚMERO " + m[i][j])
+                } else if (!isNaN(Number(m[i][j])) && m[i][j]) {
+                    c.classList.add('lvl');
                 }
             }
         }

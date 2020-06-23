@@ -14,10 +14,10 @@ function App() {
       <>
       <BrowserRouter >
             <Switch>
-                <Route exact path={Keys.INPUT_SCORE} component={InputScore}/>
-                <Route exact path={Keys.LOGIN} component={LoginPage}/>
-                <Route exact path={Keys.CREATE_USER} component={CreateUserPage}/>
-                <Route exact path={Keys.TABLE_GAME} component={TableGame}/>
+                <Route exact path={Keys.PAGE_INPUT_SCORE} component={InputScore}/>
+                <Route exact path={Keys.PAGE_LOGIN} component={LoginPage}/>
+                <Route exact path={Keys.PAGE_CREATE_USER} component={CreateUserPage}/>
+                <Route exact path={Keys.PAGE_TABLE_GAME} component={TableGame}/>
                 <Route component={PageNotFound}/>
             </Switch>
         </BrowserRouter>

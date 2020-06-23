@@ -18,10 +18,10 @@ export const CardAuthor = (props: any) => {
                 console.log("Se eligió un autor")
                 user.icon = props.author;
                 storageService.set(Keys.USER, user);
-                history.push(Keys.TABLE_GAME);
+                history.push(Keys.PAGE_TABLE_GAME);
             } else {
                 console.log("No se ha elegido un autor")
-                history.push(Keys.LOGIN);
+                history.push(Keys.PAGE_LOGIN);
             }
         }
     }
