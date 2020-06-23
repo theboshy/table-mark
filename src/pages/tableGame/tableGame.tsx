@@ -153,7 +153,7 @@ class Game {
             this.won = true;
 
             setTimeout(() => {
-                alert('You won the game!\nPress the \'Run\' button to try again.');
+                alert('!Felicidades!\nHaz logrado pasar todos los niveles.\nTu puntaje final fue de ');
             }, 1000);
         }
     }
@@ -193,7 +193,11 @@ class Game {
                             break;
                     }
                     this.changeSpawn(row, column);
-                    this.history.push(Keys.PAGE_INPUT_SCORE);
+                    let lvl = Number(levelName);
+                    this.history.push({
+                        pathname: Keys.PAGE_INPUT_SCORE,
+                        state: {level: lvl}
+                    });
                     this.open = true;
                 }
             }

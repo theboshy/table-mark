@@ -11,7 +11,7 @@ export const LoginPage = (props: any) => {
     const [userName, setUserName] = useState('');
     const [visible, setVisible] = useState(false);
     const history = useHistory();
-    const sendEmail = new SendEmail();
+
     const storageService = new StorageService();
 
     let user = User;
@@ -22,7 +22,7 @@ export const LoginPage = (props: any) => {
      * @param e event
      */
     const handleEnter = (e: any) => {
-        //sendEmail.sendEmail(e, user);
+
 
         if ((user != null)) { //There is a user created
             console.log("There is a user!");
