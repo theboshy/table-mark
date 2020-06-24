@@ -1,7 +1,10 @@
 export class Keys {
+    //General
     static USER: string = "__userJson";
     static MAP: string = "__map";
     static SPAWN: string = "__spawn";
+    static IS_CHANGE_INPUT = "__isChange";
+    static AUX_SPAWN = "__auxSpawn";
     //Pages
     static PAGE_LOGIN: string = "/";
     static PAGE_CREATE_USER: string = "/Crear-Usuario";

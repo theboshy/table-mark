@@ -4,7 +4,7 @@ import {StorageService} from "../../services/save.local.storage";
 import {Keys} from "../../keys";
 import {useHistory} from "react-router-dom";
 import {FileDownloader} from "../../services/file.downloader.service";
-import {InitialMap} from "./map";
+import {BoardMap} from "./map";
 import level from '../../mocks/levels.json';
 import {FooterComponent} from "../../components/footer/footer.component";
 
@@ -15,7 +15,7 @@ export const TableGame = (props: any) => {
 
     const history = useHistory();
     const storageService = new StorageService();
-    const map = new InitialMap();
+    const map = new BoardMap();
     useEffect(() => {
         let user;
         if (user = storageService.get(Keys.USER)) {
@@ -31,7 +31,7 @@ export const TableGame = (props: any) => {
         } else {
             setTimeout(() => {
                 alert('No has creado un usuario, por favor crea un usuario para jugar.');
-            }, 1000);
+            }, 10);
             console.log("No hay usuario")
             history.push(Keys.PAGE_LOGIN);
         }
@@ -41,9 +41,7 @@ export const TableGame = (props: any) => {
         //map.saveInitialMap(); //comentar esta línea, pues se usa para cambios de mapa en pruebas.
         let file = new FileDownloader();
         //file.downloadFile('COMPRENSIONLECTORA_1.zip')
-
         let b = document.body;
-
         let character = document.getElementById('character');
         let viewBox = document.querySelector('#viewbox');
         let width;
@@ -59,10 +57,18 @@ export const TableGame = (props: any) => {
             let p = Math.floor(character.offsetWidth / columns);
             let q = allowance * p;
             let charWidth = width - q;
+            if (storageService.get(Keys.IS_CHANGE_INPUT)) {
+                let row = storageService.get(Keys.AUX_SPAWN).r;
+                let column = storageService.get(Keys.AUX_SPAWN).c;
+                changeSpawn(row, column);
+            } else if (storageService.get(Keys.IS_CHANGE_INPUT) !== null) {
+                setTimeout(() => {
+                    alert('No ingresó puntaje para el nivel.')
+                }, 1000);
+            }
             let mapTable = storageService.get(Keys.MAP);
             let z = new Game(character, viewBox, mapTable, allowance, space, columns, rows,
                 charWidth, width, height, fps, history);
-
             z.initialize();
         }
     }
@@ -92,6 +98,19 @@ export const TableGame = (props: any) => {
         </div>
     </>
 }
+/**
+ * change the spawn by the level coordinates
+ * @param r row
+ * @param c column
+ */
+const changeSpawn = (r: number, c: number) => {
+    let beforeSpawn: any = storageService.get(Keys.SPAWN);
+    let mapLS = new BoardMap();
+    mapLS.saveMap(r, c, 'S');
+    mapLS.saveMap(beforeSpawn.i, beforeSpawn.j, ' ');
+    mapLS.saveNewSpawn(r, c);
+    storageService.set(Keys.IS_CHANGE_INPUT, false);
+}
 
 class Game {
     private character: HTMLElement;
@@ -119,7 +138,7 @@ class Game {
     private dead: boolean;
     private history: any;
     private open: boolean;
-    mapLS = new InitialMap();
+    mapLS = new BoardMap();
 
     constructor(character: HTMLElement, viewbox: Element | any, map: string[][], allowance: number, space: number,
                 columns: number, rows: number, charWidth: number, width: number, height: number, fps: number, history: any) {
@@ -194,30 +213,20 @@ class Game {
                             console.log("Este tipo de juego no existe");
                             break;
                     }
-                    this.changeSpawn(row, column);
                     let lvl = Number(levelName);
                     this.history.push({
                         pathname: Keys.PAGE_INPUT_SCORE,
                         state: {level: lvl}
                     });
+                    if (!storageService.get(Keys.IS_CHANGE_INPUT)) {
+                        storageService.set(Keys.AUX_SPAWN, {r: row, c: column});
+                    }
                     this.open = true;
                 }
             }
         }
     }
 
-    /**
-     * change the spawn by the level coordinates
-     * @param r row
-     * @param c column
-     */
-    changeSpawn(r: number, c: number) {
-        let beforeSpawn: any = localStorage.getItem(Keys.SPAWN);
-        beforeSpawn = JSON.parse(beforeSpawn);
-        this.mapLS.saveMap(r, c, 'S');
-        this.mapLS.saveMap(beforeSpawn.i, beforeSpawn.j, ' ');
-        this.mapLS.saveNewSpawn(r, c);
-    }
 
     /**
      * find and return the level in the levels json.

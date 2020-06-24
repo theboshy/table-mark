@@ -8,23 +8,35 @@ import {SendEmail} from "../../services/send.email";
 
 export const InputScore = (props: any) => {
     const history = useHistory();
-    const [inputScore, setInputScore] = useState(0);
+    const [inputScore, setInputScore] = useState(-1);
     let user = User;
     const storageService = new StorageService();
-    const lvl: number = props.location.state.level;
+    user = storageService.get(Keys.USER);
+    const lvl = props.location.state.level;
     const handleButton = () => {
-        user = storageService.get(Keys.USER);
-        let scores = user.score;
-        if (!scores[lvl - 1]) {
-            scores.push({"level": lvl, "score": inputScore});
+        if (inputScore && inputScore > 0) {
+            let data = {user: user, level: lvl};
+            if (true) {
+                let scores = user.score;
+                if (!scores[lvl - 1]) {
+                    scores.push({"level": lvl, "score": inputScore});
+                } else {
+                    scores[lvl - 1]["level"] = lvl;
+                    scores[lvl - 1]["score"] = inputScore;
+                }
+                user.currentLevel = lvl;
+                storageService.set(Keys.USER, user);
+                storageService.set(Keys.IS_CHANGE_INPUT, true);
+            } else {
+                setTimeout(() => {
+                    alert('No se pudo enviar el mensaje por un fallo en conexión de internet.\nSi el problema persiste comunícalo.');
+                }, 1000);
+                storageService.set(Keys.IS_CHANGE_INPUT, false);
+            }
         } else {
-            scores[lvl - 1]["level"] = lvl;
-            scores[lvl - 1]["score"] = inputScore;
+            storageService.set(Keys.IS_CHANGE_INPUT, false);
         }
-        storageService.set(Keys.USER, user);
         history.push(Keys.PAGE_TABLE_GAME);
-        let data = {user: user, level: lvl};
-        SendEmail(data);
     }
 
     return <>

@@ -2,7 +2,7 @@ import React from "react";
 import {StorageService} from "../../services/save.local.storage";
 import {Keys} from "../../keys";
 
-export class InitialMap {
+export class BoardMap {
     storageService = new StorageService();
     spawn = {i: 1, j: 1};
     boardMap = [

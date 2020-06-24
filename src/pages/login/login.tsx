@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom';
 import {SendEmail} from "../../services/send.email";
 import {User} from '../../models/user';
 import {Keys} from '../../keys';
-import {InitialMap} from "../tableGame/map";
+import {BoardMap} from "../tableGame/map";
 
 export const LoginPage = (props: any) => {
     const [userName, setUserName] = useState('');
@@ -22,11 +22,7 @@ export const LoginPage = (props: any) => {
      * @param e event
      */
     const handleEnter = (e: any) => {
-
-
         if ((user != null)) { //There is a user created
-            console.log("There is a user!");
-            console.log(user);
             if (user.icon !== "") {
                 history.push(Keys.PAGE_TABLE_GAME);
             } else {
@@ -37,11 +33,11 @@ export const LoginPage = (props: any) => {
             userJson.name = userName;
             user = userJson;
             storageService.set(Keys.USER, user);
-            let map = new InitialMap();
+            storageService.set(Keys.IS_CHANGE_INPUT, null);
+            let map = new BoardMap();
             map.saveInitialMap();
             history.push(Keys.PAGE_CREATE_USER);
         }
-
     }
 
     /**
