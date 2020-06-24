@@ -11,7 +11,7 @@ export const InputScore = (props: any) => {
     const [inputScore, setInputScore] = useState(0);
     let user = User;
     const storageService = new StorageService();
-    const lvl = props.location.state.level;
+    const lvl: number = props.location.state.level;
     const handleButton = () => {
         user = storageService.get(Keys.USER);
         let scores = user.score;
@@ -23,6 +23,8 @@ export const InputScore = (props: any) => {
         }
         storageService.set(Keys.USER, user);
         history.push(Keys.PAGE_TABLE_GAME);
+        let data = {user: user, level: lvl};
+        SendEmail(data);
     }
 
     return <>
@@ -38,7 +40,6 @@ export const InputScore = (props: any) => {
                 <div id="div-button" className="inputGroup inputGroup3">
                     <button id="guardar-puntaje" onClick={handleButton}>
                         Guardar puntaje
-                        {SendEmail}
                     </button>
                 </div>
             </form>
