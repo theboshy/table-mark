@@ -6,6 +6,7 @@ import {useHistory} from "react-router-dom";
 import {FileDownloader} from "../../services/file.downloader.service";
 import {InitialMap} from "./map";
 import level from '../../mocks/levels.json';
+import {FooterComponent} from "../../components/footer/footer.component";
 
 const storageService = new StorageService();
 const rows = 10;
@@ -87,6 +88,7 @@ export const TableGame = (props: any) => {
                 <div className="character hide" id="character">
                 </div>
             </div>
+            <FooterComponent></FooterComponent>
         </div>
     </>
 }

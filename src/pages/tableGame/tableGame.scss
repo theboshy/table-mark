@@ -124,6 +124,7 @@ $pixel: $grid-size / $pixdiv;
 @mixin character($size, $pixel, $flip) {
   width: $size;
   height: $size;
+  display: flex;
   position: absolute;
   transition: top 0.1s ease-in, left 0.15s;
   background: {
@@ -228,6 +229,7 @@ $classes: (
   flex-shrink: 0;
   flex-grow: 0;
   background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.paredro.com%2Flos-20-mejores-libros-sobre-diseno-grafico-del-2014-parte-i%2F&psig=AOvVaw1T-5yLJ-moqo1aFbbVen5d&ust=1592761169999000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDF9vD3kOoCFQAAAAAdAAAAABAD);
+  text-align: center;
 
   .screen {
     width: $grid-size * $columns;
