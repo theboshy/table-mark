@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1afa02d74a40e49ddeacbfc05a4e6a11",
+    "revision": "f922235ec2a9b0b66d84e8fd66129d33",
     "url": "https://theboshy.github.io/table-mark/index.html"
   },
   {
-    "revision": "8ba8371a662118366241",
-    "url": "https://theboshy.github.io/table-mark/static/css/main.4322da12.chunk.css"
+    "revision": "de15e1da7a65347024e1",
+    "url": "https://theboshy.github.io/table-mark/static/css/main.c1c1d91a.chunk.css"
   },
   {
     "revision": "4f87424bfa9b3b46f6ce",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://theboshy.github.io/table-mark/static/js/2.77a27961.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8ba8371a662118366241",
+    "revision": "de15e1da7a65347024e1",
     "url": "https://theboshy.github.io/table-mark/static/js/main.2ad248cb.chunk.js"
   },
   {
