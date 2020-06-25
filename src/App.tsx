@@ -19,7 +19,6 @@ export const App = (props: any) => {
                 <Route component={PageNotFound}/>
             </Switch>
         </BrowserRouter>
-          <button onClick={() =>  './login'}>Login</button>
       </>
 }
 

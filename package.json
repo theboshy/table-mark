@@ -1,7 +1,6 @@
 {
-  "homepage":"https://theboshy.github.io/table-mark",
-  "name": "table-mark",
   "homepage": "https://theboshy.github.io/table-mark/",
+  "name": "table-mark",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
