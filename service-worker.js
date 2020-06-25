@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://theboshy.github.io/table-mark/precache-manifest.ba791365bd72631d0cfd9068418c3cc8.js"
+  "https://theboshy.github.io/table-mark/precache-manifest.556ebc2908e9b74e5c0004cd30655317.js"
 );
 
 self.addEventListener('message', (event) => {

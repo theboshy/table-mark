@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "https://theboshy.github.io/table-mark/static/css/main.ded87374.chunk.css",
+    "main.css": "https://theboshy.github.io/table-mark/static/css/main.4322da12.chunk.css",
     "main.js": "https://theboshy.github.io/table-mark/static/js/main.2ad248cb.chunk.js",
     "main.js.map": "https://theboshy.github.io/table-mark/static/js/main.2ad248cb.chunk.js.map",
     "runtime-main.js": "https://theboshy.github.io/table-mark/static/js/runtime-main.39ed4dfb.js",
@@ -8,15 +8,15 @@
     "static/js/2.77a27961.chunk.js": "https://theboshy.github.io/table-mark/static/js/2.77a27961.chunk.js",
     "static/js/2.77a27961.chunk.js.map": "https://theboshy.github.io/table-mark/static/js/2.77a27961.chunk.js.map",
     "index.html": "https://theboshy.github.io/table-mark/index.html",
-    "precache-manifest.ba791365bd72631d0cfd9068418c3cc8.js": "https://theboshy.github.io/table-mark/precache-manifest.ba791365bd72631d0cfd9068418c3cc8.js",
+    "precache-manifest.556ebc2908e9b74e5c0004cd30655317.js": "https://theboshy.github.io/table-mark/precache-manifest.556ebc2908e9b74e5c0004cd30655317.js",
     "service-worker.js": "https://theboshy.github.io/table-mark/service-worker.js",
-    "static/css/main.ded87374.chunk.css.map": "https://theboshy.github.io/table-mark/static/css/main.ded87374.chunk.css.map",
+    "static/css/main.4322da12.chunk.css.map": "https://theboshy.github.io/table-mark/static/css/main.4322da12.chunk.css.map",
     "static/js/2.77a27961.chunk.js.LICENSE.txt": "https://theboshy.github.io/table-mark/static/js/2.77a27961.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.39ed4dfb.js",
     "static/js/2.77a27961.chunk.js",
-    "static/css/main.ded87374.chunk.css",
+    "static/css/main.4322da12.chunk.css",
     "static/js/main.2ad248cb.chunk.js"
   ]
 }
