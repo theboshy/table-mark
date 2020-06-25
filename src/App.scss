@@ -61,6 +61,7 @@ button {
   font-family: inherit;
   transition: background-color .2s ease-out;
 }
+$URL: 'https://theboshy.github.io/table-mark/background.jpg';
 
 body {
   margin: 0;
@@ -69,7 +70,7 @@ body {
   height: 100%;
   font-size: 18px;
   font-family: 'Lato', 'Arial', sans-serif;
-  background-image: url("/../../background.jpg");
+  background-image: url($URL);
   background-size: 100% 100%;
   height: 100vh;
   background-attachment: fixed;
