@@ -9,7 +9,6 @@ import {TableGame} from "./pages/tableGame/tableGame";
 import {Keys} from "./keys";
 
 export const App = (props: any) => {
-    const history = useHistory();
   return <>
     <BrowserRouter >
             <Switch>
