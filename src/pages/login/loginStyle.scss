@@ -3,13 +3,14 @@ $medBlue: #4eb8dd;
 $lightBlue: #ddf1fa;
 $inputBG: #f3fafd;
 
-body{
-  background-color:#092B40;
-  margin: 0; padding: 0;
-  width: 100%; height: 100%;
-  font-size:18px;
-  font-family: 'Lato', 'Arial', sans-serif;
+.container-all{
+
 }
+.login-container{
+  position: relative;
+  margin:2em;
+}
+
 
 i{
   color:#ffffff;
@@ -51,31 +52,17 @@ form{
   margin-bottom: 10px;
 }
 
-input[type='text'] {
-  -webkit-appearance: none;
-  outline: none;
-  border: 5px solid #ffffff;
-  border-radius: 25px;
-  width: 275px;
-  height: 50px;
-  color: white;
-  background-color:#092B40;
-  text-align:center;
+
+.layoutContainer{
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: 0;
+  justify-content: space-around;
 }
 
-button {
-  background-color: #092B40;
-  border:none;
-}
-
-body {
-  background-image: url(http://www.austop.net.au/media/catalog/category/3d-wood-table-top-background-with-tabletop-background-tabletop-background-tabletop.jpg);
-  background-size: cover;
-  height: 100vh;
-}
 .book {
-  position: fixed;
-  top: 40%;
+  position: relative;
+  top: 2em;
   left: 0;
   right: 0;
   bottom: 0;
@@ -197,8 +184,10 @@ body {
 
 
 form {
+  -webkit-text-stroke: .05em black;
   position: absolute;
-  top: 21em;
+  border:  .2em solid #9c6b38;
+  top: 13em;
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
@@ -208,7 +197,6 @@ form {
   margin: 0;
   padding: 2.25em;
   box-sizing: border-box;
-  border: solid 1px #DDD;
   border-radius: .5em;
   font-family: 'Source Sans Pro', sans-serif;
 
@@ -255,34 +243,11 @@ form {
     margin: 0 0 12px;
     display: block;
     font-size: 1.25em;
-    color: #217093;
+    color: rgba(67, 56, 24, .95);
     font-weight: 700;
     font-family: inherit;
   }
 
-  input[type='email'], input[type="text"], input[type='password'] {
-    display: block;
-    margin: 0;
-    padding: 0 1em 0;
-    background-color: $inputBG;
-    border: solid 2px $darkBlue;
-    border-radius: 4px;
-    -webkit-appearance: none;
-    box-sizing: border-box;
-    width: 100%;
-    height: 65px;
-    font-size: 1.55em;
-    color: #353538;
-    font-weight: 600;
-    font-family: inherit;
-    transition: box-shadow .2s linear, border-color .25s ease-out;
-
-    &:focus {
-      outline: none;
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-      border: solid 2px #4eb8dd;
-    }
-  }
 
   input[type='email'], input[type="text"] {
     padding: 14px 1em 0px;
@@ -292,7 +257,7 @@ form {
     display: block;
     margin: 0;
     padding: .65em 1em 1em;
-    background-color: $medBlue;
+    background-color: #7b552b;
     border: none;
     border-radius: 4px;
     box-sizing: border-box;
@@ -334,5 +299,11 @@ form {
       transform: translate(1.4em, 1.2em) scale(0.65);
       opacity: 1;
     }
+  }
+
+  .labelName{
+    text-align: center;
+    font-size: 2.5em;
+    text-transform: uppercase;
   }
 }

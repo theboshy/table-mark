@@ -10,6 +10,7 @@ export const Card = (props: any) => {
 
     const showConsole = (log = '') => {
         console.log('result:', log);
+        console.log(props.name, log);
         asyncFunction().then( () => {
             setTime(1);
             setOme('ome 2');
