@@ -7,6 +7,7 @@ import {FileDownloader} from "../../services/file.downloader.service";
 import {BoardMap} from "./map";
 import level from '../../mocks/levels.json';
 import {FooterComponent} from "../../components/footer/footer.component";
+import {User} from "../../models/user";
 
 const storageService = new StorageService();
 const rows = 10;
@@ -94,7 +95,7 @@ export const TableGame = (props: any) => {
                 <div className="character hide" id="character">
                 </div>
             </div>
-            <FooterComponent></FooterComponent>
+            {storageService.get(Keys.USER) ? <FooterComponent></FooterComponent> : ""}
         </div>
     </>
 }
@@ -169,12 +170,21 @@ class Game {
         this.open = false;
     }
 
-    gameWin() {
+    gameWin(row: number, column: number) {
         if (this.won === false) {
             this.won = true;
 
             setTimeout(() => {
-                alert('!Felicidades!\nHaz logrado pasar todos los niveles.\nTu puntaje final fue de ');
+                let total = 0;
+                let user = User;
+                user = storageService.get(Keys.USER);
+                user.score.forEach((element: any) => {
+                    total += element.score;
+                })
+                changeSpawn(row, column);
+                storageService.set(Keys.IS_CHANGE_INPUT, true);
+                window.location.reload();
+                alert('!Felicidades!\nHaz logrado pasar todos los niveles.\nTu puntaje final fue de ' + total);
             }, 1000);
         }
     }
@@ -197,17 +207,23 @@ class Game {
             let levelJson = this.selectorLevel(levelName);
             if (!this.open) {
                 if (levelJson) {
+                    let fileDownloader = new FileDownloader();
                     switch (levelJson.type) {
                         case Keys.TYPE_ZIP:
-                            let fileDownloader = new FileDownloader();
                             //fileDownloader.downloadFile(levelJson.resource);
                             console.log("Es un ZIp");
                             break;
                         case Keys.TYPE_EDUCAPLAY:
-                            window.open(levelJson.resource);
+                            window.open(levelJson.resource, '_blank', "shilpijain", false);
+                            window.focus();
                             console.log("Es una página externa")
                             break;
                         case Keys.TYPE_HTML:
+                            if (levelJson.info) {
+                                fileDownloader.downloadFile(levelJson.info);
+                            }
+                            window.open(levelJson.resource, '_blank', "shilpijain", false);
+                            window.focus();
                             break;
                         default:
                             console.log("Este tipo de juego no existe");
@@ -216,7 +232,7 @@ class Game {
                     let lvl = Number(levelName);
                     this.history.push({
                         pathname: Keys.PAGE_INPUT_SCORE,
-                        state: {level: lvl}
+                        state: {level: lvl},
                     });
                     if (!storageService.get(Keys.IS_CHANGE_INPUT)) {
                         storageService.set(Keys.AUX_SPAWN, {r: row, c: column});
@@ -289,17 +305,23 @@ class Game {
             j = Math.floor((x + (a * 2)) / w);
             l = Math.floor((x + w - (a * 2) - 1) / w);
         }
-        let boxName = m[i][j];
-        if (boxName === 'X') {
-            console.log("Hola");
-            //this.inLevel("Tipo 1", i, j);
+        let boxName: string = " ";
+        if (i && j) {
+            boxName = m[i][j];
+            if (boxName) {
+                if (boxName === 'X') {
+                    console.log("Hola");
+                    //this.inLevel("Tipo 1", i, j);
+                }
+                if (!isNaN(Number(boxName)) && boxName !== ' ') {
+                    this.inLevel(boxName, i, j);
+                } else if (boxName === 'O') {
+                    this.gameWin(i, j);
+                }
+            }
         }
-        if (!isNaN(Number(boxName)) && boxName !== ' ') {
-            this.inLevel(boxName, i, j);
-        }
-
         try {
-            let o = boxName;
+            let o = m[i][j];
             let p = m[k][l];
 
 
@@ -308,8 +330,6 @@ class Game {
                     x: (j * w),
                     y: (i * h)
                 };
-            } else if (o === 'O') {
-                this.gameWin();
             } else {
                 return null;
             }
@@ -367,7 +387,11 @@ class Game {
 
     renderCharacter() {
         let c = this.character;
-        c.style.backgroundImage = "url(" + storageService.get(Keys.USER).icon.icon + ")";
+        let icon: string;
+        if (storageService.get(Keys.USER)) {
+            icon = storageService.get(Keys.USER).icon.icon;
+            c.style.backgroundImage = "url(" + icon + ")";
+        }
         //console.log(storageService.get(Keys.USER).icon.icon);
         c.style.top = this.position.y + 'px';
         c.style.left = this.position.x + 'px';
@@ -450,7 +474,7 @@ class Game {
                 } else if (m[i][j] === 'S') {
                     this.position = {x: j * w, y: i * h};
                 } else if (!isNaN(Number(m[i][j])) && m[i][j]) {
-                    c.classList.add('lvl');
+                    c.classList.add('lvl-' + m[i][j]);
                 }
             }
         }
@@ -481,7 +505,7 @@ class Game {
             let u = m.charWidth;
             let c = m.character;
 
-            if (this.won === false && this.dead === false) {
+            if (this.won === false) {
                 if (a === 37) {
                     m.moveCharacter(Math.floor(u * -0.15), 'l');
                 } else if (a === 39) {

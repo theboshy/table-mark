@@ -5,7 +5,6 @@ import author from '../../mocks/authors.json';
 import {Keys} from "../../keys";
 import {User} from "../../models/user";
 import {StorageService} from "../../services/save.local.storage";
-
 export const FooterComponent = (props: any) => {
 
     const storageService = new StorageService();

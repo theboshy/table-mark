@@ -1,8 +1,3 @@
-.container-game {
-  position: relative;
-  margin: .5em .5em .5em 1em;
-}
-
 // INSTRUCTION
 // Just go to the white block below
 // Please do not look at the map (at the bottom of Javascript source code). It's cheating.
@@ -15,7 +10,7 @@
 $white: #ffffff;
 $grey: #8f8f8f;
 $black: #271C01;
-$background-image: url(https://image.freepik.com/vector-gratis/cielo-nubes-pixel-art-fondo-cloudscape-juego-retro_53562-3521.jpg);
+$background-image: url("/../../resources/background_game/background-game.jpg");
 $ground-1: #a0522d;
 $ground-2: #cd853F;
 $lawn: #228b22;
@@ -27,7 +22,7 @@ $rows: 10;
 $columns: 23;
 
 // VARIABLES
-$grid-size: 3.2em;
+$grid-size: 3em;
 $move-time: .1s;
 
 // CHARACTER PIXEL ART START
@@ -186,7 +181,7 @@ $classes: (
                 'bg-type': image
         ),
         'finish': (
-                'bg': transparent,
+                'bg': url("/../../resources/background_game/diamante.png"),
                 'bg-type': image
         ),
         'space': (
@@ -195,19 +190,91 @@ $classes: (
         ),
         'lvl': (
                 'bg': (
-                        linear-gradient(to bottom, $block-1 0% 2%, transparent 2% 98%, $block-1 98% 100%),
-                        linear-gradient(to right, $block-1 0% 2%, transparent 2% 98%, $block-1 98% 100%),
-                        linear-gradient(to bottom, $block-2 0 10%, transparent 10% 100%),
-                        linear-gradient(to right, $block-2 0 10%, transparent 10% 100%),
-                        linear-gradient($LVL 0 100%)
+                        //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-1': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl1.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-2': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl2.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-3': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl3.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-4': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl4.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-5': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl5.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-6': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl6.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-7': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl7.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-8': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl8.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-9': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl9.png")
+                ),
+                'bg-type': image
+        ),
+        'lvl-10': (
+                'bg': (
+                  //url(https://e7.pngegg.com/pngimages/703/359/png-clipart-pile-of-books-illustration-school-library-reading-librarian-stacked-books-angle-white-thumbnail.png)
+                        url("/../../resources/background_game/lvl10.png")
                 ),
                 'bg-type': image
         )
 );
 
 @mixin common($bg, $bg-type, $grid-size) {
-  background-#{$bg-type}: $bg;
-  background-size: $grid-size;
+  display: flex;
+  background:{
+    #{$bg-type}: $bg;
+    size:contain;
+    repeat: no-repeat;
+    position: center;
+  }
   width: $grid-size;
   height: $grid-size;
 }
@@ -225,12 +292,13 @@ $classes: (
 
 .container-game {
   /*overflow: hidden;*/
+  display: flex;
   position: relative;
   flex-shrink: 0;
   flex-grow: 0;
-  background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.paredro.com%2Flos-20-mejores-libros-sobre-diseno-grafico-del-2014-parte-i%2F&psig=AOvVaw1T-5yLJ-moqo1aFbbVen5d&ust=1592761169999000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDF9vD3kOoCFQAAAAAdAAAAABAD);
+  margin: 0 .5em 0 3.5%;
   text-align: center;
-
+  //display: block;
   .screen {
     width: $grid-size * $columns;
     height: $grid-size * $rows;
@@ -239,7 +307,9 @@ $classes: (
     position: relative;
     top: 0;
     transition: top 0.3s;
-
+    margin-top: .4em;
+    border: .4em solid #71491F;
+    border-radius: 1em;
     .row {
       display: grid;
       grid-template-columns: repeat($columns, $grid-size);

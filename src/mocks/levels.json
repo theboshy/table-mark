@@ -14,13 +14,13 @@
   {
     "level": "3",
     "type": "html",
-    "resource": "",
-    "info": "pdf editar esto"
+    "resource": "../../resources/INTERPRETATIVO.htm",
+    "info": "Avatares de la vida (Fragmento II).pdf"
   },
   {
     "level": "4",
     "type": "html",
-    "resource": "",
+    "resource":  "../../resources/ASOCIACION902.htm",
     "info": ""
   },
   {
@@ -38,7 +38,7 @@
   {
     "level": "7",
     "type": "html",
-    "resource": "",
+    "resource": "../../resources/huecos902.htm",
     "info": ""
   },
   {
